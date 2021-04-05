@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Grammar: TagHeader XMLTail
  *          '<' "Name" Attributes Whitespace ( ( '>' InnerNodes '</' "Name" '>' ) | '/>' )
  */
-public class XMLTag extends AbstractParseNode implements CopyNode<XMLTag>, XMLStreamable {
+public final class XMLTag extends AbstractParseNode implements CopyNode<XMLTag>, XMLStreamable {
     private final TagHeader _head;
     private final XMLTail _tail;
 

@@ -103,6 +103,10 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         return Objects.hash(_buffer.toString(), _acceptCondition);
     }
 
+    /**
+     * @param sequence the String or CharSequence to be checked.
+     * @return true if all of the characters are whitespaces.
+     */
     protected boolean isBlank(CharSequence sequence) {
         for (int i = 0; i != sequence.length(); ++i) {
             char ch = sequence.charAt(i);
@@ -115,5 +119,4 @@ public class OptionalConsumer implements ParseNode, CharSequence {
 
         return true;
     }
-
 }

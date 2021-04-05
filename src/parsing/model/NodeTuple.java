@@ -1,7 +1,10 @@
 package parsing.model;
 
 /**
- * A node tuple is a more tightly coupled node sequence
+ * A node tuple is a sequential combination of two arbitrary nodes.
+ * It can be seen as a special case of the SequenceNode.
+ *
+ * Grammar: First Second
  */
 public class NodeTuple<First extends CopyNode<First>, Second extends CopyNode<Second>>
         extends AbstractParseNode implements CopyNode<NodeTuple<First, Second>> {

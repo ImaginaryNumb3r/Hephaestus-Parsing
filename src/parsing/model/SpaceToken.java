@@ -29,13 +29,13 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
     }
 
     /**
-     * TODO: Calling reset will violate the invariant of this class.
-     * The class is defined to have at least one whitespace, but calling
-     * this class will set the amount of numbers to zero.
+     * This will reset the object to have a single whitespace.
+     * The content length cannot be set to zero because this violates the invariant of the class.
      */
     @Override
     public void reset() {
         _buffer.setLength(0);
+        _buffer.append(' ');
     }
 
     @Override

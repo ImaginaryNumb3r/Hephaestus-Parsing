@@ -6,7 +6,7 @@ import java.util.function.Function;
 /**
  * @author Patrick Plieschnegger
  */
-public class OptionalTag implements OptionalXML<XMLTag> {
+public final class OptionalTag implements OptionalXML<XMLTag> {
     private final Optional<XMLTag> _tag;
 
     public OptionalTag(Optional<XMLTag> attribute) {_tag = attribute;}

@@ -12,7 +12,7 @@ import static java.util.Collections.emptyList;
  * Created: 21.03.2019
  * Grammar: ( '>' InnerNodes '</' "Name" '>' ) | '/>'
  */
-public class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
+public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
     private static final StringTerminal FALLBACK = new StringTerminal("/>");
     private final InnerNodes _nodes;
     private final TextToken _name;

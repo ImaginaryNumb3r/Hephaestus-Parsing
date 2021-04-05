@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Created: 20.03.2019
  * TODO: Rename to Attribute Attributes?
  */
-public class XMLAttributes extends MultiNode<AttributeToken> implements CopyNode<XMLAttributes> {
+public final class XMLAttributes extends MultiNode<AttributeToken> implements CopyNode<XMLAttributes> {
 
     protected XMLAttributes() {
         super(AttributeToken::new);

@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * @author Patrick Plieschnegger
  */
-public class AttributesStreamImpl extends XMLStreamImpl<AttributeToken, AttributeStream>
+public final class AttributesStreamImpl extends XMLStreamImpl<AttributeToken, AttributeStream>
         implements AttributeStream {
 
     /*package*/ AttributesStreamImpl(List<AttributeToken> attributes, XMLStreamImpl<AttributeToken, AttributeStream> parent) {

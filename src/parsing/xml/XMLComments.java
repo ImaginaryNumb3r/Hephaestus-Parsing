@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * @author Patrick Plieschnegger
  */
-public class XMLComments extends MultiNode<NodeTuple<CommentToken, WhitespaceToken>> implements CopyNode<XMLComments> {
+public final class XMLComments extends MultiNode<NodeTuple<CommentToken, WhitespaceToken>> implements CopyNode<XMLComments> {
 
     public XMLComments() {
         super( () -> new NodeTuple<>(new CommentToken(), new WhitespaceToken()) );

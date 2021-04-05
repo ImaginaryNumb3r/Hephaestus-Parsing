@@ -15,7 +15,7 @@ import java.util.Optional;
  *          Whitespace [ CommentTag | '<' "Name" Attributes Whitespace ( ( '>' InnerNodes '</' "Name" '>' ) | '/>' ) ]
  * TODO: Turn Comment into separate Node
  */
-public class XMLNode extends EitherNode<XMLTag, CommentToken> implements CopyNode<XMLNode>, Serializable {
+public final class XMLNode extends EitherNode<XMLTag, CommentToken> implements CopyNode<XMLNode>, Serializable {
     private final WhitespaceToken _leadingWhitespace;
 
     public XMLNode() {

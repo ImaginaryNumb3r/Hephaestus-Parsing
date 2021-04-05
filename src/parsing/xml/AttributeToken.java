@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Created: 20.03.2019
  * Grammar: Space Text Whitespace '=' Whitespace "Text"
  */
-public class AttributeToken extends SequenceNode implements CopyNode<AttributeToken> {
+public final class AttributeToken extends SequenceNode implements CopyNode<AttributeToken> {
     private final TextToken _name;
     private final ContentNode _value;
 

@@ -18,7 +18,7 @@ import static java.util.Collections.singletonList;
  * Created: 25.03.2019
  * Purpose: Prolog? XMLTag Whitespace
  */
-public class XMLDocument extends AbstractParseNode implements CopyNode<XMLDocument>, XMLStreamable {
+public final class XMLDocument extends AbstractParseNode implements CopyNode<XMLDocument>, XMLStreamable {
     private final XMLProlog _prologue;
     private WhitespaceToken _prologueWhitespace;
     private final XMLComments _comments;

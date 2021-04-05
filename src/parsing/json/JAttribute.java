@@ -10,11 +10,11 @@ import java.util.Arrays;
  * Grammar: Whitespace "Key" Whitespace ":" JValue
  */
 public final class JAttribute extends SequenceNode implements CopyNode<JAttribute> {
-    private ContentNode _key;
+    private ContentToken _key;
     private JValue _value;
 
     public JAttribute() {
-        _key = new ContentNode("\"");
+        _key = new ContentToken("\"");
         _value = new JValue();
 
         _sequence.addAll(

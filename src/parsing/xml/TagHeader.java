@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Created: 20.03.2019
  * Grammar: '<' Name Attributes Whitespace
  */
-public class TagHeader extends SequenceNode implements CopyNode<TagHeader> {
+public final class TagHeader extends SequenceNode implements CopyNode<TagHeader> {
     private final TextToken _name;
     private final XMLAttributes _attributes;
     private final WhitespaceToken _whitespace;

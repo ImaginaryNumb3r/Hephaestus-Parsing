@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * @author Patrick Plieschnegger
  */
-/*package*/ class TagStreamImpl extends XMLStreamImpl<XMLTag, TagStream> implements TagStream {
+/*package*/ final class TagStreamImpl extends XMLStreamImpl<XMLTag, TagStream> implements TagStream {
 
     /*package*/ TagStreamImpl(@NotNull List<XMLTag> tags,
                               @Nullable XMLStreamImpl<XMLTag, TagStream> parent

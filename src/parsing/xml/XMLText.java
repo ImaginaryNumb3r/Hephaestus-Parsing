@@ -12,7 +12,7 @@ import java.util.Objects;
  * Created: 22.03.2019
  * The text that can be between nodes
  */
-public class XMLText extends ContentNode implements CopyNode<XMLText> {
+public final class XMLText extends ContentNode implements CopyNode<XMLText> {
     private static final String POSTFIX = "<";
 
     public XMLText() {

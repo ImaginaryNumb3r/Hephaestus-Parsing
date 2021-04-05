@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * @author Patrick Plieschnegger
  */
-public class OptionalAttribute implements OptionalXML<AttributeToken> {
+public final class OptionalAttribute implements OptionalXML<AttributeToken> {
     private final Optional<AttributeToken> _attribute;
 
     public OptionalAttribute(Optional<AttributeToken> attribute) {_attribute = attribute;}

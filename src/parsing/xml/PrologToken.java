@@ -8,7 +8,7 @@ import parsing.model.CopyNode;
  * Created: 20.03.2019
  * TODO: Also consume Attributes (similar to ClosedTag)
  */
-public class PrologToken extends ContentNode implements CopyNode<PrologToken> {
+public final class PrologToken extends ContentNode implements CopyNode<PrologToken> {
 
     public PrologToken() {
         super("<?", "?>");

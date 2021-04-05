@@ -14,7 +14,7 @@ import java.util.Objects;
  * Created: 25.03.2019
  * Grammar: <?xml Attributes >
  */
-public class XMLProlog extends SequenceNode implements CopyNode<XMLProlog> {
+public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog> {
     private static final String START_TERMINAL = "<?xml";
     private static final String END_TERMINAL = "?>";
     private final XMLAttributes _attributes;

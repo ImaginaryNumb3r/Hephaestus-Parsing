@@ -10,7 +10,7 @@ import java.util.Objects;
  * Created: 21.03.2019
  * Grammar: '<!--' "Text" '--/>'
  */
-public class CommentToken extends ContentNode implements CopyNode<CommentToken> {
+public final class CommentToken extends ContentNode implements CopyNode<CommentToken> {
     public static String COMMENT_START = "<!--";
     public static String COMMENT_END = "-->";
 

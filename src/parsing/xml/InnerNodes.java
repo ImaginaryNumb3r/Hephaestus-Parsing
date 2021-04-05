@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Created: 22.03.2019
  * Grammar: ( XMLNode )* | XMLText
  */
-public class InnerNodes extends MultiNode<XMLNode> implements CopyNode<InnerNodes> {
+public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<InnerNodes> {
     private final XMLText _text;
     private Status _status;
 
