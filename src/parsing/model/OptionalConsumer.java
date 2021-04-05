@@ -94,8 +94,9 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         if (this == o) return true;
         if (!(o instanceof OptionalConsumer)) return false;
         OptionalConsumer that = (OptionalConsumer) o;
-        return Objects.equals(_buffer.toString(), that._buffer.toString()) &&
-                Objects.equals(_acceptCondition, that._acceptCondition);
+
+        // Remark: Lambdas cannot be compared by value.
+        return Objects.equals(_buffer.toString(), that._buffer.toString());
     }
 
     @Override

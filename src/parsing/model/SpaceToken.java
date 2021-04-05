@@ -1,14 +1,35 @@
 package parsing.model;
 
+import collections.iterator.Iterables;
+import collections.iterator.Iterators;
+
+import java.util.ListIterator;
+
 /**
  * Creator: Patrick
  * Created: 20.03.2019
  * Series of whitespaces that is at least of size 1.
+ * @apiNote The object can never have zero characters at any given point.
  */
 public final class SpaceToken extends OptionalConsumer implements CopyNode<SpaceToken> {
+    private static final char DEFAULT_WHITESPACE = ' ';
 
     public SpaceToken() {
+        this(DEFAULT_WHITESPACE);
+    }
+
+    private SpaceToken(char whitespace) {
         super(Character::isWhitespace);
+        _buffer.append(whitespace);
+    }
+
+    private SpaceToken(CharSequence whitespace) {
+        super(Character::isWhitespace);
+        _buffer.append(whitespace);
+    }
+
+    public void setSpace(char whitespace){
+        setSpace(String.valueOf(whitespace));
     }
 
     public void setSpace(CharSequence whitespace){
@@ -18,24 +39,33 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
         if (!isBlank(whitespace))
             throw new IllegalArgumentException("Provided string must be a whitespace for space tokens");
 
-        reset();
-        _buffer.append(whitespace);
+        /*
+         * IMPORTANT: We can't simply set he length to 0 and append the sequence
+         * Doing so would violate the invariants and expose faulty state via concurrency.
+         */
+        _buffer.setLength(whitespace.length());
+
+        int i = 0;
+        for (char ch : Iterables.of(whitespace)) {
+            _buffer.setCharAt(i, ch);
+            ++i;
+        }
     }
 
     @Override
     public void setData(SpaceToken other) {
         reset();
-        _buffer.append(other);
+        setSpace(other._buffer);
     }
 
     /**
      * This will reset the object to have a single whitespace.
      * The content length cannot be set to zero because this violates the invariant of the class.
+     * @apiNote this method is not thread save as the invariants of this class are violated.
      */
     @Override
     public void reset() {
-        _buffer.setLength(0);
-        _buffer.append(' ');
+        setSpace(DEFAULT_WHITESPACE);
     }
 
     @Override
@@ -44,5 +74,21 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
         copy._buffer.append(_buffer);
 
         return copy;
+    }
+
+    /**
+     *
+     * @param whitespace
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public static SpaceToken of(CharSequence whitespace) throws IllegalArgumentException {
+        Iterables.of(whitespace).forEach(ch -> {
+            if (!Character.isWhitespace(ch)) {
+                throw new IllegalArgumentException();
+            }
+        });
+
+        return new SpaceToken(whitespace);
     }
 }

@@ -11,18 +11,19 @@ import java.util.function.Supplier;
 /**
  * Creator: Patrick
  * Created: 27.10.2019
- * A value that is preceded by a comma and according whitespaces. It is to be used in objects and arrays.
+ * A value that is preceded by a comma and according whitespaces.
+ * It can never be the first element in the series and is to be used in objects and arrays.
  * Grammar: ',' T
  */
-/*package*/ final class MultiValue<T extends CopyNode<T>> extends SequenceNode implements CopyNode<MultiValue<T>> {
+/*package*/ final class IntermediateValue<T extends CopyNode<T>> extends SequenceNode implements CopyNode<IntermediateValue<T>> {
     private final Supplier<T> _valueConstructor;
     private final T _value;
 
-    public MultiValue(Supplier<T> valueConstructor) {
+    public IntermediateValue(Supplier<T> valueConstructor) {
         this(valueConstructor, valueConstructor.get());
     }
 
-    public MultiValue(Supplier<T> valueConstructor, T defaultValue) {
+    public IntermediateValue(Supplier<T> valueConstructor, T defaultValue) {
         _valueConstructor = valueConstructor;
         _value = defaultValue;
 
@@ -35,8 +36,8 @@ import java.util.function.Supplier;
     }
 
     @Override
-    public MultiValue<T> deepCopy() {
-        MultiValue<T> other = new MultiValue<>(_valueConstructor);
+    public IntermediateValue<T> deepCopy() {
+        IntermediateValue<T> other = new IntermediateValue<>(_valueConstructor);
         other.setData(this);
 
         return other;
@@ -47,7 +48,7 @@ import java.util.function.Supplier;
     }
 
     @Override
-    public void setData(MultiValue other) {
+    public void setData(IntermediateValue<T> other) {
         super.setData(other);
     }
 

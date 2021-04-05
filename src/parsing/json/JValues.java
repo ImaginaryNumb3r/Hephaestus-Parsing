@@ -19,11 +19,11 @@ import static java.util.Arrays.asList;
  */
 /*package*/ final class JValues extends SequenceNode implements CopyNode<JValues> {
     private final JValue _first;
-    private final MultiNode<MultiValue<JValue>> _values;
+    private final MultiNode<IntermediateValue<JValue>> _values;
 
     public JValues() {
         _first = new JValue();
-        _values = new MultiNode<>(() -> new MultiValue<>(JValue::new));
+        _values = new MultiNode<>(() -> new IntermediateValue<>(JValue::new));
 
         _sequence.addAll(asList(new WhitespaceToken(), _first, _values));
     }
@@ -51,7 +51,7 @@ import static java.util.Arrays.asList;
         values.add(_first);
 
         _values.stream()
-                .map(MultiValue::getValue)
+                .map(IntermediateValue::getValue)
                 .forEach(values::add);
 
         return values;

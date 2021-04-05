@@ -18,11 +18,11 @@ import static java.util.Arrays.asList;
  */
 /*package*/ final class JAttributes extends SequenceNode implements CopyNode<JAttributes> {
     private final JAttribute _first;
-    private final MultiNode<MultiValue<JAttribute>> _values;
+    private final MultiNode<IntermediateValue<JAttribute>> _values;
 
     public JAttributes() {
         _first = new JAttribute();
-        _values = new MultiNode<>(() -> new MultiValue<>(JAttribute::new));
+        _values = new MultiNode<>(() -> new IntermediateValue<>(JAttribute::new));
 
         _sequence.addAll(asList(new WhitespaceToken(), _first, _values));
     }
@@ -50,7 +50,7 @@ import static java.util.Arrays.asList;
         values.add(_first);
 
         _values.stream()
-                .map(MultiValue::getValue)
+                .map(IntermediateValue::getValue)
                 .forEach(values::add);
 
         return values;
