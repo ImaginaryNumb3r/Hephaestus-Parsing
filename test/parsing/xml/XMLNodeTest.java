@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
  * Created: 22.03.2019
  * Purpose:
  */
-public class XMLNodeTest extends AbstractParseNodeTest {
+public class XMLNodeTest extends XMLParseNodeTest {
 
     @Test
     public void testParseComments() {

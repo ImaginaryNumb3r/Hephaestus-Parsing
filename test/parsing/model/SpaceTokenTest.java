@@ -1,11 +1,11 @@
 package parsing.model;
 
 import org.junit.Test;
-import parsing.xml.AbstractParseNodeTest;
+import parsing.xml.XMLParseNodeTest;
 
 import static org.junit.Assert.*;
 
-public class SpaceTokenTest extends AbstractParseNodeTest {
+public class SpaceTokenTest extends XMLParseNodeTest {
 
     @Test
     public void testSetSpace() {

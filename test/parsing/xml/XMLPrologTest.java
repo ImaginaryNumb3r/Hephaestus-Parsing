@@ -9,7 +9,7 @@ import java.util.List;
  * Created: 25.03.2019
  * Purpose:
  */
-public class XMLPrologTest extends AbstractParseNodeTest {
+public class XMLPrologTest extends XMLParseNodeTest {
     private static final List<String> TEST_DATA = readTestData("XMLProlog.xml");
 
     @Test

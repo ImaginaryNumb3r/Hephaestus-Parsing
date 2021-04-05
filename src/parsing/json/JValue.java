@@ -15,15 +15,16 @@ import java.util.Optional;
 public class JValue extends AbstractParseNode implements CopyNode<JValue> {
     private JValueType _type;
     private CopyNode<?> _value;
-    // TODO: there should be concrete subclasses: JObject, JArray, JString, JNumber, JBool, JNull
 
     public JValue() {
-        // Only approach I can think of: try to parse all of the different types and remember the according type as field.
-        // Then always cast the object to its correct type
     }
 
+    /**
+     * @implNote This tries to parse all of the different types and remembers the according type as field.
+     * When retrieving the value later, the object must be cast to its correct type.
+     */
     @Override
-    public ParseResult parseImpl(String chars, int index) {
+    protected ParseResult parseImpl(String chars, int index) {
         var map = new HashMap<CopyNode<?>, JValueType>();
         map.put(new JObject(), JValueType.OBJECT);
         map.put(new JArray(), JValueType.ARRAY);
@@ -78,7 +79,13 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
         return isBoolean() ? ((JBool) _value).fetchBool() : Optional.empty();
     }
 
-    public Boolean getBoolean() {
+    public boolean getBoolean() {
+        if (!isBoolean()) {
+            String type = _type != null ? _type.toString() : "none";
+            throw new IllegalStateException("Cannot return boolean from JValue. Current type is: \" " + type +" \"");
+        }
+
+        //noinspection ConstantConditions
         return ((JBool) _value).getBool();
     }
 
@@ -87,17 +94,14 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
     }
 
     public Optional<JArray> fetchArray() {
-        throw new NoImplementationException();
-        // TODO: return isBoolean() ? ((JArray) _value).fetchBool() : Optional.empty();
+        return isArray() ? Optional.of((JArray) _value) : Optional.empty();
     }
 
     public JArray getArray() {
-        throw new NoImplementationException();
-        // TODO: return ((JArray) _value).getBool();
+        return fetchArray().orElse(null);
     }
 
-
-    private ParseResult tryParse(ParseNode node, String chars, int index) {
+    public ParseResult tryParse(ParseNode node, String chars, int index) {
         return node.parse(chars, index);
     }
 

@@ -1,14 +1,12 @@
 package parsing.xml;
 
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import static org.junit.Assert.assertTrue;
 
-public class XMLStreamTest extends AbstractParseNodeTest {
+public class XMLStreamTest extends XMLParseNodeTest {
 
     /**
      * TODO: Re-test this once I've implemented TagStreamImpl::filter

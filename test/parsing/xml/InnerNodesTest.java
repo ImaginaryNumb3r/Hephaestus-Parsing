@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Purpose:
  */
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class InnerNodesTest extends AbstractParseNodeTest {
+public class InnerNodesTest extends XMLParseNodeTest {
     private static final List<String> TEST_DATA = readTestData("InnerNodes.xml");
 
     @Test

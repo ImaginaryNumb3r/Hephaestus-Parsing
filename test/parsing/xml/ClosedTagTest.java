@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  * Created: 20.03.2019
  * Purpose:
  */
-public class ClosedTagTest extends AbstractParseNodeTest {
+public class ClosedTagTest extends XMLParseNodeTest {
     private static final List<String> SAMPLES = readTestData("ClosedTag.xml");
 
     @Test

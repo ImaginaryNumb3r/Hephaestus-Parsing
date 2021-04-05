@@ -9,7 +9,7 @@ import java.util.List;
  * Created: 22.03.2019
  * Purpose:
  */
-public class XMLTailTest extends AbstractParseNodeTest {
+public class XMLTailTest extends XMLParseNodeTest {
     public static final List<String> TEST_DATA = readTestData("XMLTail.xml");
 
     @Test

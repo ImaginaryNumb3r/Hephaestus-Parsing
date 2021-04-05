@@ -4,13 +4,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static parsing.xml.AbstractParseNodeTest.TEST_FILE_DIR;
+import static parsing.xml.XMLParseNodeTest.TEST_FILE_DIR;
 
 /**
  * Creator: Patrick

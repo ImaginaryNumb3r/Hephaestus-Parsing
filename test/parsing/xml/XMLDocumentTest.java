@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * Created: 25.03.2019
  * Purpose:
  */
-public class XMLDocumentTest extends AbstractParseNodeTest {
+public class XMLDocumentTest extends XMLParseNodeTest {
 
     @Test
     public void testComplete2() throws IOException {

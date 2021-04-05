@@ -1,7 +1,7 @@
 package parsing.model;
 
 import org.junit.Test;
-import parsing.xml.AbstractParseNodeTest;
+import parsing.xml.XMLParseNodeTest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created: 30.03.2019
  * Purpose:
  */
-public class TextTokenTest extends AbstractParseNodeTest {
+public class TextTokenTest extends XMLParseNodeTest {
     private static final List<String> TEST_DATA = Arrays.asList("Text1Number_Underscore ");
 
     @Test

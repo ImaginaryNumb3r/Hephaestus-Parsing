@@ -9,7 +9,7 @@ import java.util.List;
  * Created: 21.03.2019
  * Purpose:
  */
-public class XMLTagTest extends AbstractParseNodeTest {
+public class XMLTagTest extends XMLParseNodeTest {
     public static final List<String> TEST_DATA;
 
     static {

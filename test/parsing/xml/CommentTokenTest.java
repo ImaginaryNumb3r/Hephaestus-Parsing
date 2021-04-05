@@ -10,7 +10,7 @@ import java.util.List;
  * Created: 21.03.2019
  * Purpose:
  */
-public class CommentTokenTest extends AbstractParseNodeTest {
+public class CommentTokenTest extends XMLParseNodeTest {
     public static final List<TestPair> TEST_DATA = Arrays.asList(
             new TestPair("<!-- comment -->", " comment "),
             new TestPair("<!---->", ""),
