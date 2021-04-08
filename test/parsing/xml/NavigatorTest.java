@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
 import static parsing.xml.XMLParseNodeTest.TEST_FILE_DIR;
 
 /**

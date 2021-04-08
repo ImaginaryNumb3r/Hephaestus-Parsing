@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Creator: Patrick

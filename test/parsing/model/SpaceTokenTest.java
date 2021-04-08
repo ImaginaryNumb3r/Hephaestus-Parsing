@@ -3,7 +3,8 @@ package parsing.model;
 import org.junit.Test;
 import parsing.xml.XMLParseNodeTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class SpaceTokenTest extends XMLParseNodeTest {
 

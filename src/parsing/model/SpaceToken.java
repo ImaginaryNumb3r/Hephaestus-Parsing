@@ -1,9 +1,6 @@
 package parsing.model;
 
 import collections.iterator.Iterables;
-import collections.iterator.Iterators;
-
-import java.util.ListIterator;
 
 /**
  * Creator: Patrick
