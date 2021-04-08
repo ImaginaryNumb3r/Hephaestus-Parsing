@@ -28,6 +28,20 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
         _buffer.append(whitespace);
     }
 
+    @Override
+    public ParseResult parse(String chars, int start) {
+        char mandatoryChar = chars.charAt(start);
+
+        if (!_acceptCondition.test(mandatoryChar)) {
+            String message = "Cannot parse mandatory char for Space token: \"" + mandatoryChar + "\"";
+            return ParseResult.invalid(start, message);
+        }
+        _buffer.setCharAt(0, mandatoryChar);
+        ++start;
+
+        return super.parse(chars, start);
+    }
+
     public void setSpace(char whitespace){
         setSpace(String.valueOf(whitespace));
     }
@@ -71,7 +85,14 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
     @Override
     public SpaceToken deepCopy() {
         var copy = new SpaceToken();
-        copy._buffer.append(_buffer);
+
+        char mandatoryChar = _buffer.charAt(0);
+        copy._buffer.setCharAt(0, mandatoryChar);
+
+        if (_buffer.length() > 1) {
+            CharSequence remainingChars = _buffer.subSequence(1, _buffer.length());
+            copy._buffer.append(remainingChars);
+        }
 
         return copy;
     }

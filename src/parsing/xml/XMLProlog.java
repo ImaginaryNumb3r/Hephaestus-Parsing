@@ -1,9 +1,6 @@
 package parsing.xml;
 
-import parsing.model.CopyNode;
-import parsing.model.SequenceNode;
-import parsing.model.StringTerminal;
-import parsing.model.WhitespaceToken;
+import parsing.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,21 +9,24 @@ import java.util.Objects;
 /**
  * Creator: Patrick
  * Created: 25.03.2019
- * Grammar: <?xml Attributes >
+ * Grammar: '<?xml' Attributes '?>'
  */
 public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog> {
     private static final String START_TERMINAL = "<?xml";
     private static final String END_TERMINAL = "?>";
+    private final SpaceToken _space;
     private final XMLAttributes _attributes;
     private final WhitespaceToken _trailingWhitespace;
 
     public XMLProlog() {
         super(new ArrayList<>());
 
+        _space = new SpaceToken();
         _attributes = new XMLAttributes();
         _trailingWhitespace = new WhitespaceToken();
         _sequence.addAll(Arrays.asList(
                 new StringTerminal(START_TERMINAL),
+                _space,
                 _attributes,
                 _trailingWhitespace,
                 new StringTerminal(END_TERMINAL)
@@ -36,9 +36,11 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
     @Override
     public XMLProlog deepCopy() {
         XMLProlog copy = new XMLProlog();
+        SpaceToken spaceCopy = _space.deepCopy();
         XMLAttributes attributesCopy = _attributes.deepCopy();
         WhitespaceToken whitespaceCopy = _trailingWhitespace.deepCopy();
 
+        copy._space.setData(spaceCopy);
         copy._attributes.setData(attributesCopy);
         copy._trailingWhitespace.setData(whitespaceCopy);
 
@@ -48,6 +50,7 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
     @Override
     public void reset() {
         super.reset();
+        _space.reset();
         _attributes.reset();
         _trailingWhitespace.reset();
     }
@@ -59,20 +62,20 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
         _attributes.setData(other._attributes);
         _trailingWhitespace.setData(other._trailingWhitespace);
 
-
         if (!equals(other)) {
             throw new IllegalStateException();
         }
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof XMLProlog)) return false;
-        if (!super.equals(o)) return false;
-        XMLProlog that = (XMLProlog) o;
-        return Objects.equals(_attributes, that._attributes) &&
-                Objects.equals(_trailingWhitespace, that._trailingWhitespace);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof XMLProlog)) return false;
+        if (!super.equals(obj)) return false;
+        XMLProlog other = (XMLProlog) obj;
+        return Objects.equals(_attributes, other._attributes) &&
+                Objects.equals(_space, other._space) &&
+                Objects.equals(_trailingWhitespace, other._trailingWhitespace);
     }
 
     @Override
@@ -82,6 +85,8 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
 
     @Override
     public String toString() {
-        return START_TERMINAL + _attributes.toString() + _trailingWhitespace.toString() + END_TERMINAL;
+        return START_TERMINAL + _space.toString()
+            + _attributes.toString()
+            + _trailingWhitespace.toString() + END_TERMINAL;
     }
 }

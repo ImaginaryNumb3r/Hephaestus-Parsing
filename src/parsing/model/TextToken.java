@@ -7,10 +7,9 @@ import java.util.Set;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Non-empty string token that is used for identifying names of tags.
- * May not contain whitespace.
+ * Non-empty string token which must not contain whitespace.
  *
- * Minor design flaw: Can be set to empty.
+ * TODO: Minor design flaw: Can be set to empty.
  */
 public final class TextToken extends ConsumerNode implements CopyNode<TextToken> {
     private static final Set<Character> ALLOWED_CHARS = Set.of('_', '.', ':', '-');

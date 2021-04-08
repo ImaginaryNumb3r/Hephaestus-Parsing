@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Creator: Patrick
  * Created: 26.03.2019
- * Purpose:
+ * TODO: On an error, you should also get the class that was responsible.
  */
 public final class ParseResult {
     private final int _cursorPosition;

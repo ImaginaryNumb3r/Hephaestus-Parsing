@@ -9,6 +9,7 @@ import java.util.Objects;
  * Created: 20.03.2019
  * Accepts all input as long as the condition evaluates to true (even the empty string).
  * Also terminates if the end of the input was reached.
+ * This class makes no assumptions about the minimum or maximum length it will parse.
  *
  * @implNote does not extend AbstractParseNode since its built-in range check would violate the empty string policy of this Consumer.
  *           Since an empty string at the end of the document is possible and likely.

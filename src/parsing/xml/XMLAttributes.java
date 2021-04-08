@@ -2,18 +2,20 @@ package parsing.xml;
 
 import parsing.model.CopyNode;
 import parsing.model.MultiNode;
+import parsing.model.NodeTuple;
+import parsing.model.WhitespaceToken;
 
 import java.util.stream.Collectors;
 
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * TODO: Rename to Attribute Attributes?
+ * Grammar: (Attribute Whitespace)*
  */
-public final class XMLAttributes extends MultiNode<AttributeToken> implements CopyNode<XMLAttributes> {
+public final class XMLAttributes extends MultiNode<NodeTuple<AttributeToken, WhitespaceToken>> implements CopyNode<XMLAttributes> {
 
     protected XMLAttributes() {
-        super(AttributeToken::new);
+        super(() -> new NodeTuple<>(new AttributeToken(), new WhitespaceToken()));
     }
 
     @Override
@@ -33,7 +35,7 @@ public final class XMLAttributes extends MultiNode<AttributeToken> implements Co
         _elements.clear();
 
         var elementsCopy = other._elements.stream()
-                .map(AttributeToken::deepCopy)
+                .map(NodeTuple::deepCopy)
                 .collect(Collectors.toList());
         _elements.addAll(elementsCopy);
     }

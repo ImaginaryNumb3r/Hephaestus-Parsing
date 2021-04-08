@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Grammar: '<' Text Blank Attributes Blank '/>'
+ * Grammar: '<' Text Space Attributes Blank '/>'
  */
 public class ClosedTag extends SequenceNode implements CopyNode<ClosedTag> {
     private final TagHeader _head;

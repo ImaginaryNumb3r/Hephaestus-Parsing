@@ -29,6 +29,14 @@ public class NodeTuple<First extends CopyNode<First>, Second extends CopyNode<Se
         return ParseResult.at(nextIndex);
     }
 
+    public First getFirst() {
+        return _first;
+    }
+
+    public Second getSecond() {
+        return _second;
+    }
+
     @Override
     public String toString() {
         return _first.toString() + _second.toString();

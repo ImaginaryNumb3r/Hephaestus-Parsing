@@ -2,8 +2,6 @@ package parsing.xml;
 
 import parsing.model.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,23 +9,71 @@ import java.util.stream.Collectors;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Grammar: '<' Name Attributes Whitespace
+ * TODO: We can turn the "XMLAttributes" token into a one-or-more token.
+ * Grammar: '<' Name (Space Attributes)? Whitespace
  */
-public final class TagHeader extends SequenceNode implements CopyNode<TagHeader> {
+public final class TagHeader extends AbstractParseNode implements CopyNode<TagHeader> {
+    private final CharTerminal _terminal;
     private final TextToken _name;
+    // TODO: We only need that space, in case there are attributes. Otherwise, this is not necessary.
+    private final SpaceToken _space;
     private final XMLAttributes _attributes;
     private final WhitespaceToken _whitespace;
+    private boolean _hasAttributes;
 
     public TagHeader() {
-        super(new ArrayList<>());
+        _terminal = new CharTerminal('<');
         _name = new TextToken();
+        _space = new SpaceToken();
         _attributes = new XMLAttributes();
-
         _whitespace= new WhitespaceToken();
-        _sequence.addAll(Arrays.asList(
-                new CharTerminal('<'), _name, _attributes, _whitespace
 
-        ));
+        _hasAttributes = false;
+    }
+
+    @Override
+    protected ParseResult parseImpl(String chars, final int index) {
+        // Parse mandatory '<'.
+        ParseResult result = _terminal.parse(chars, index);
+        if (result.isInvalid()) {
+            return result;
+        }
+        int nextIndex = result.index();
+
+        // Parse mandatory tag name.
+        result = _name.parse(chars, nextIndex);
+        if (result.isInvalid()) {
+            return result;
+        }
+        nextIndex = result.index();
+
+        // Parse optional space + attributes token.
+        result = _space.parse(chars, nextIndex);
+        if (result.isValid()) {
+            result = _attributes.parse(chars, result.index());
+            if (result.isValid()) {
+                nextIndex = result.index();
+                _hasAttributes = true;
+            }
+        }
+
+        // Parse whitespace.
+        result = _whitespace.parse(chars, nextIndex);
+
+        return result;
+    }
+
+    /**
+     * @return String representation of the token if parsing is finished. Otherwise null.
+     */
+    @Override
+    public String toString() {
+        String prefix = _terminal.toString() + _name.toString();
+        String attributes = _space.toString() + _attributes.toString();
+
+        return _hasAttributes
+            ? prefix + attributes + _whitespace.toString()
+            : prefix + _whitespace.toString();
     }
 
     public String getName() {
@@ -39,7 +85,13 @@ public final class TagHeader extends SequenceNode implements CopyNode<TagHeader>
     }
 
     public List<AttributeToken> getAttributes() {
-        return _attributes.getElements();
+        return _attributes.getElements().stream()
+            .map(NodeTuple::getFirst)
+            .collect(Collectors.toList());
+    }
+
+    public String getSpace() {
+        return _space.toString();
     }
 
     public String getWhitespace() {
@@ -48,6 +100,10 @@ public final class TagHeader extends SequenceNode implements CopyNode<TagHeader>
 
     public void setWhitespace(CharSequence whitespace) {
         _whitespace.setWhitespace(whitespace);
+    }
+
+    public void setSpace(CharSequence whitespace) {
+        _space.setSpace(whitespace);
     }
 
     @Override
@@ -60,11 +116,8 @@ public final class TagHeader extends SequenceNode implements CopyNode<TagHeader>
 
     @Override
     public void reset() {
-        // Clear sequence of elements.
-        super.reset();
-
-        // Clear elements themselves within the sequence.
         _name.reset();
+        _space.reset();
         _attributes.getElements().clear();
         _whitespace.setWhitespace("");
     }
@@ -73,38 +126,33 @@ public final class TagHeader extends SequenceNode implements CopyNode<TagHeader>
     public void setData(TagHeader other) {
         reset();
 
-        setName(other.getName());
+        _name.setData(other._name);
+        _space.setSpace(other._space);
+        _attributes.setData(other._attributes);
         _whitespace.setWhitespace(other._whitespace.toString());
 
-        var attributes = getAttributes();
-        var attributeCopies = other._attributes.getElements().stream()
-                .map(AttributeToken::deepCopy)
-                .collect(Collectors.toList());
-
-        attributes.addAll(attributeCopies);
-
-        var sequenceCopy = other._sequence.stream()
-                .map(ParseNode::deepCopy)
-                .collect(Collectors.toList());
-        _sequence.addAll(sequenceCopy);
+        _hasAttributes = other._hasAttributes;
 
         if (!equals(other)) {
+            // TODO: Turn into unit test.
             throw new IllegalStateException();
         }
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TagHeader)) return false;
-        if (!super.equals(o)) return false;
-        TagHeader that = (TagHeader) o;
-        return Objects.equals(_name, that._name) &&
-                Objects.equals(_attributes, that._attributes);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof TagHeader)) return false;
+        TagHeader other = (TagHeader) obj;
+        return Objects.equals(_name, other._name) &&
+                Objects.equals(_space, other._space) &&
+                Objects.equals(_attributes, other._attributes) &&
+                Objects.equals(_hasAttributes, other._hasAttributes) &&
+                Objects.equals(_whitespace, other._whitespace);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), _name, _attributes);
+        return Objects.hash(_name, _space, _attributes, _whitespace, _hasAttributes);
     }
 }

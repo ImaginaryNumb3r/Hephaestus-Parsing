@@ -65,9 +65,7 @@ public class XMLParseNodeTest {
     protected void checkParse(String expected, String data, int expectedParseLength, ParseNode token,
                               Supplier<String> dataSupplier, Supplier<String> toString
     ) {
-        long before = System.currentTimeMillis();
         var result = token.parse(data, 0);
-        long after = System.currentTimeMillis();
 
         String message = "Asserting that the token could be parsed fails for: " + data;
         assertTrue(message, result.isValid());
