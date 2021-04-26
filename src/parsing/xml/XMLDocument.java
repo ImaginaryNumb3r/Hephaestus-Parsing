@@ -138,13 +138,6 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
     }
 
     @Override
-    public void reset() {
-        _prologue.reset();
-        _root.reset();
-        _trailingWhitespace.reset();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof XMLDocument)) return false;

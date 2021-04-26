@@ -193,12 +193,6 @@ public final class JNumber extends AbstractParseNode implements CopyNode<JNumber
         _value = other._value;
     }
 
-    @Override
-    public void reset() {
-        _string = null;
-        _value = Double.NaN;
-    }
-
     public String getAsString() {
         return _string;
     }

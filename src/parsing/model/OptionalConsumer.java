@@ -15,7 +15,7 @@ import java.util.Objects;
  *           Since an empty string at the end of the document is possible and likely.
  */
 public class OptionalConsumer implements ParseNode, CharSequence {
-    /*package*/ final StringBuilder _buffer;
+    protected final StringBuilder _buffer;
     /*package*/ final CharPredicate _acceptCondition;
 
     /*package*/ OptionalConsumer(CharPredicate acceptCondition) {
@@ -38,6 +38,7 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         }
 
         String slice = chars.substring(start, end);
+        _buffer.setLength(0);
         _buffer.append(slice);
 
         return ParseResult.at(end);

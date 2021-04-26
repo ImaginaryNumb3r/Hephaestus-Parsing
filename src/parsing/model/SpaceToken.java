@@ -65,7 +65,7 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
 
     @Override
     public void setData(SpaceToken other) {
-        reset();
+        // reset();
         setSpace(other._buffer);
     }
 

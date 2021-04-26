@@ -15,7 +15,7 @@ import static java.util.Collections.emptyList;
 public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
     private static final StringTerminal FALLBACK = new StringTerminal("/>");
     private final InnerNodes _nodes;
-    private final TextToken _name;
+    private final ElementNameToken _name;
     private final WhitespaceToken _trailingWhitespace;
     private boolean _closedTag;
 
@@ -23,7 +23,7 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
         super(new ArrayList<>());
 
         _nodes = new InnerNodes();
-        _name = new TextToken();
+        _name = new ElementNameToken();
         _trailingWhitespace = new WhitespaceToken();
         _sequence.addAll(Arrays.asList(
                 new CharTerminal('>'),
@@ -89,7 +89,7 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
             throw new IllegalStateException("Cannot set name of a closed tag");
         }
 
-        _name.setText(name);
+        _name.setName(name);
     }
 
     public boolean isClosedTag() {
@@ -97,7 +97,7 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
     }
 
     @Override
-    public ParseResult parse(String chars, int index) {
+    protected ParseResult parseImpl(String chars, int index) {
         ParseResult result = super.parse(chars, index);
 
         if (result.isInvalid()) {
@@ -108,13 +108,12 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
             }
         }
 
-        return result;
+        return super.parseImpl(chars, result.index());
     }
 
     //<editor-fold desc="Data Methods">
     @Override
     public void setData(XMLTail other) {
-        reset();
         super.setData(other);
 
         _nodes.setData(other._nodes);
@@ -127,13 +126,6 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
         }
     }
 
-    @Override
-    public void reset() {
-        super.reset();
-        _nodes.getElements().clear();
-        _name.reset();
-        _closedTag = false;
-    }
     @Override
     public XMLTail deepCopy() {
         XMLTail copy = new XMLTail();

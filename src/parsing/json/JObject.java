@@ -35,11 +35,6 @@ public final class JObject extends SequenceNode implements CopyNode<JObject> {
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public JObject deepCopy() {
         JObject other = new JObject();
         other.setData(this);

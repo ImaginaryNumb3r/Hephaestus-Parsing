@@ -61,12 +61,6 @@ public class ClosedTag extends SequenceNode implements CopyNode<ClosedTag> {
     }
 
     @Override
-    public void reset() {
-        super.reset();
-        _head.reset();
-    }
-
-    @Override
     public void setData(ClosedTag other) {
         _head.setData(other._head);
     }

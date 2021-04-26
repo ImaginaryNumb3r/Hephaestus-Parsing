@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public final class TagHeader extends AbstractParseNode implements CopyNode<TagHeader> {
     private final CharTerminal _terminal;
-    private final TextToken _name;
+    private final ElementNameToken _name;
     // TODO: We only need that space, in case there are attributes. Otherwise, this is not necessary.
     private final SpaceToken _space;
     private final XMLAttributes _attributes;
@@ -23,7 +23,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
 
     public TagHeader() {
         _terminal = new CharTerminal('<');
-        _name = new TextToken();
+        _name = new ElementNameToken();
         _space = new SpaceToken();
         _attributes = new XMLAttributes();
         _whitespace= new WhitespaceToken();
@@ -81,7 +81,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
     }
 
     public void setName(String name) {
-        _name.setText(name);
+        _name.setName(name);
     }
 
     public List<AttributeToken> getAttributes() {
@@ -115,17 +115,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
     }
 
     @Override
-    public void reset() {
-        _name.reset();
-        _space.reset();
-        _attributes.getElements().clear();
-        _whitespace.setWhitespace("");
-    }
-
-    @Override
     public void setData(TagHeader other) {
-        reset();
-
         _name.setData(other._name);
         _space.setSpace(other._space);
         _attributes.setData(other._attributes);

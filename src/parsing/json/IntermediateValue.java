@@ -51,9 +51,4 @@ import java.util.function.Supplier;
     public void setData(IntermediateValue<T> other) {
         super.setData(other);
     }
-
-    @Override
-    public void reset() {
-        super.reset();
-    }
 }

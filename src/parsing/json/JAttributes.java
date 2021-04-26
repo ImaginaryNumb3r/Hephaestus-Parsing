@@ -33,11 +33,6 @@ import static java.util.Arrays.asList;
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public JAttributes deepCopy() {
         JAttributes other = new JAttributes();
         other.setData(this);

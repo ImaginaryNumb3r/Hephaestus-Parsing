@@ -81,12 +81,6 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
         return new EitherNode<>(optionalCopy, mandatoryCopy);
     }
 
-    protected void reset() {
-        Nulls.ifPresent(_mandatory, _mandatory::reset);
-        Nulls.ifPresent(_optional, _optional::reset);
-        _status = Status.NONE;
-    }
-
     protected void setData(EitherNode<O, M> other) {
         if (_mandatory != null) {
             _mandatory.setData(other._mandatory);

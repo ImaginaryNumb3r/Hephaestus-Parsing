@@ -52,15 +52,8 @@ public class NodeTuple<First extends CopyNode<First>, Second extends CopyNode<Se
 
     @Override
     public void setData(NodeTuple<First, Second> other) {
-        reset();
         _first.setData(other._first);
         _second.setData(other._second);
-    }
-
-    @Override
-    public void reset() {
-        _first.reset();
-        _second.reset();
     }
 
     @Override

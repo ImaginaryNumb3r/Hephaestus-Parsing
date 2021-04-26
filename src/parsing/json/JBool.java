@@ -87,10 +87,4 @@ public final class JBool extends AbstractParseNode implements CopyNode<JBool> {
         _value = other._value;
         _parsed = other._parsed;
     }
-
-    @Override
-    public void reset() {
-        _value = false;
-        _parsed = false;
-    }
 }

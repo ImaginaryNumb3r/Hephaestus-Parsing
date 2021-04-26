@@ -34,11 +34,6 @@ import static java.util.Arrays.asList;
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public JValues deepCopy() {
         JValues other = new JValues();
         other.setData(this);

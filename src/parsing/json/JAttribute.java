@@ -68,11 +68,6 @@ public final class JAttribute extends SequenceNode implements CopyNode<JAttribut
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public JAttribute deepCopy() {
         JAttribute other = new JAttribute();
         other.setData(this);

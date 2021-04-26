@@ -82,13 +82,7 @@ public final class XMLNode extends EitherNode<XMLTag, CommentToken> implements C
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public void setData(XMLNode other) {
-        reset();
         super.setData(other);
         _leadingWhitespace.setWhitespace(other._leadingWhitespace);
     }

@@ -1,19 +1,18 @@
 package parsing.xml;
 
-import parsing.model.CopyNode;
-import parsing.model.MultiNode;
-import parsing.model.NodeTuple;
-import parsing.model.WhitespaceToken;
+import parsing.model.*;
 
 import java.util.stream.Collectors;
 
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Grammar: (Attribute Whitespace)*
+ * Grammar: (Attribute Whitespace)+
  */
-public final class XMLAttributes extends MultiNode<NodeTuple<AttributeToken, WhitespaceToken>> implements CopyNode<XMLAttributes> {
+public final class XMLAttributes extends OneOrMoreNode<NodeTuple<AttributeToken, WhitespaceToken>> implements CopyNode<XMLAttributes> {
 
+    // TODO: Reverse Order -> Whitespace and then AttributeToken.
+    // What if we Had "OneOrMore" instead of MultiNode?
     protected XMLAttributes() {
         super(() -> new NodeTuple<>(new AttributeToken(), new WhitespaceToken()));
     }
@@ -38,10 +37,5 @@ public final class XMLAttributes extends MultiNode<NodeTuple<AttributeToken, Whi
                 .map(NodeTuple::deepCopy)
                 .collect(Collectors.toList());
         _elements.addAll(elementsCopy);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
     }
 }

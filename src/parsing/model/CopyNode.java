@@ -16,6 +16,4 @@ public interface CopyNode<T extends ParseNode> extends ParseNode {
 
     void setData(T other);
 
-    void reset();
-
 }

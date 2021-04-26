@@ -141,10 +141,4 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
     public void setData(JValue other) {
         throw new NoImplementationException();
     }
-
-    @Override
-    public void reset() {
-        _type = null;
-        _value.reset();
-    }
 }

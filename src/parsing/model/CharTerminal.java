@@ -43,11 +43,6 @@ public final class CharTerminal extends AbstractParseNode implements CopyNode<Ch
     }
 
     @Override
-    public void reset() {
-        // Noop.
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof CharTerminal)) return false;

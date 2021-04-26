@@ -51,11 +51,6 @@ public final class StringTerminal extends AbstractParseNode implements CopyNode<
     }
 
     @Override
-    public void reset() {
-        // Noop.
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof StringTerminal)) return false;

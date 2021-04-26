@@ -43,11 +43,6 @@ public final class JDocument extends SequenceNode implements CopyNode<JDocument>
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public JDocument deepCopy() {
         JDocument other = new JDocument();
         other.setData(this);

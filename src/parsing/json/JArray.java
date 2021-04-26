@@ -57,11 +57,6 @@ public final class JArray extends SequenceNode implements CopyNode<JArray> {
     }
 
     @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
     public void setData(JArray other) {
         super.setData(other);
     }

@@ -3,12 +3,21 @@ package parsing.model;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Purpose:
+ * TODO: What to do if
+ * Phases:
+ *  - Universal Preconditions
+ *  - Preconditions
+ *  - Full parse
+ *  - Set Data
+ *
+ *  Nodes: OneOrMore <  Multinode
+ *
+ *
  */
 public abstract class AbstractParseNode implements ParseNode {
 
     @Override
-    public ParseResult parse(String chars, int index) {
+    public final ParseResult parse(String chars, int index) {
 
         if (index >= chars.length() || index < 0) {
             if (index >= chars.length()) return ParseResult.invalid(index, "Index is larger than document length.");

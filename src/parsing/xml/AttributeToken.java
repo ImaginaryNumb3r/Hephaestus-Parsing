@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
  * Grammar: Text Whitespace '=' Whitespace "Text"
  */
 public final class AttributeToken extends SequenceNode implements CopyNode<AttributeToken> {
-    private final TextToken _name;
+    private final ElementNameToken _name;
     private final ContentNode _value;
 
     public AttributeToken() {
-        _name = new TextToken();
+        _name = new ElementNameToken();
         _value = new ContentNode("\"");
 
         _sequence.addAll(
@@ -35,7 +35,7 @@ public final class AttributeToken extends SequenceNode implements CopyNode<Attri
     }
 
     public void setName(String name) {
-        _name.setText(name);
+        _name.setName(name);
     }
 
     public void setValue(String value) {
@@ -48,12 +48,6 @@ public final class AttributeToken extends SequenceNode implements CopyNode<Attri
         copy.setData(this);
 
         return copy;
-    }
-
-    @Override
-    public void reset() {
-        _name.reset();
-        _value.setContent("");
     }
 
     @Override

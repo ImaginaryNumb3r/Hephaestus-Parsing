@@ -118,12 +118,6 @@ public final class XMLTag extends AbstractParseNode implements CopyNode<XMLTag>,
     }
 
     @Override
-    public void reset() {
-        _head.reset();
-        _tail.reset();
-    }
-
-    @Override
     protected ParseResult parseImpl(String chars, int index) {
         int nextIndex;
 
