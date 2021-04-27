@@ -15,15 +15,15 @@ import java.util.stream.Stream;
 /**
  * @author Patrick Plieschnegger
  */
-/*package*/ final class TagStreamImpl extends XMLStreamImpl<XMLTag, TagStream> implements TagStream {
+/*package*/ final class TagStreamImpl extends XMLStreamImpl<XMLElement, TagStream> implements TagStream {
 
-    /*package*/ TagStreamImpl(@NotNull List<XMLTag> tags,
-                              @Nullable XMLStreamImpl<XMLTag, TagStream> parent
+    /*package*/ TagStreamImpl(@NotNull List<XMLElement> tags,
+                              @Nullable XMLStreamImpl<XMLElement, TagStream> parent
     ) {
         super(tags, TagStreamImpl::new, parent);
     }
 
-    /*package*/ TagStreamImpl(@NotNull List<XMLTag> tags) {
+    /*package*/ TagStreamImpl(@NotNull List<XMLElement> tags) {
         this(tags, null);
     }
 
@@ -33,18 +33,18 @@ import java.util.stream.Stream;
     }
 
     @Override
-    public TagStream filter(Predicate<XMLTag> predicate) {
+    public TagStream filter(Predicate<XMLElement> predicate) {
         // TODO: Make it that filter only sets the name for the tag that is searched.
         // The actual execution of the path is done in a separate method and executed on the terminal operations.
         // _parent.filter()
         throw new NoImplementationException();
 
         /*
-        var filtered = new ArrayList<XMLTag>();
+        var filtered = new ArrayList<XMLElement>();
 
-        for (XMLTag xmlTag : _values) {
-            if (predicate.test(xmlTag)) {
-                filtered.add(xmlTag);
+        for (XMLElement XMLElement : _values) {
+            if (predicate.test(XMLElement)) {
+                filtered.add(XMLElement);
             }
         }
 
@@ -65,7 +65,7 @@ import java.util.stream.Stream;
     public AttributesStreamImpl findAttributes(Predicate<AttributeToken> predicate) {
         var attributes = new ArrayList<AttributeToken>();
 
-        for (XMLTag tag : _values) {
+        for (XMLElement tag : _values) {
             for (AttributeToken attribute : tag.attributes()) {
                 if (predicate.test(attribute)) {
                     attributes.add(attribute);
@@ -78,25 +78,25 @@ import java.util.stream.Stream;
 
     @Override
     public OptionalTag findFirst() {
-        Optional<XMLTag> xmlTag = _values.isEmpty()
+        Optional<XMLElement> XMLElement = _values.isEmpty()
             ? Optional.empty()
             : Optional.of(_values.get(0));
 
-        return new OptionalTag(xmlTag);
+        return new OptionalTag(XMLElement);
     }
 
     @Override
-    public <T> Stream<T> map(Function<XMLTag, T> mapper) {
+    public <T> Stream<T> map(Function<XMLElement, T> mapper) {
         return _values.stream().map(mapper);
     }
 
     @Override
-    public <T> Stream<T> flatMap(Function<XMLTag, Stream<T>> mapper) {
+    public <T> Stream<T> flatMap(Function<XMLElement, Stream<T>> mapper) {
         return _values.stream().flatMap(mapper);
     }
 
     @Override
-    public Stream<XMLTag> stream() {
+    public Stream<XMLElement> stream() {
         return _values.stream();
     }
 }

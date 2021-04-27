@@ -51,7 +51,7 @@ public class XMLDocumentTest extends XMLParseNodeTest {
 
         checkParse(file, file, document, document::toString);
 
-        XMLTag root = document.getRoot();
+        XMLElement root = document.getRoot();
         assertEquals(root.getName(), "AssetDeclaration");
 
         assertEquals(1, root.children().size());

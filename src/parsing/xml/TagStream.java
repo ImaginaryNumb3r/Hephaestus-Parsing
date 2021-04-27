@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
  * @author Patrick Plieschnegger
  */
-public interface TagStream extends XMLStream<XMLTag, TagStream>{
+public interface TagStream extends XMLStream<XMLElement, TagStream>{
 
     AttributeStream findAttributes();
 
@@ -17,10 +17,10 @@ public interface TagStream extends XMLStream<XMLTag, TagStream>{
 
     OptionalTag findFirst();
 
-    <T> Stream<T> map(Function<XMLTag, T> mapper);
+    <T> Stream<T> map(Function<XMLElement, T> mapper);
 
-    <T> Stream<T> flatMap(Function<XMLTag, Stream<T>> mapper);
+    <T> Stream<T> flatMap(Function<XMLElement, Stream<T>> mapper);
 
-    Stream<XMLTag> stream();
+    Stream<XMLElement> stream();
 
 }

@@ -18,5 +18,4 @@ public class ElementNameTokenTest extends XMLParseNodeTest {
             checkParse(data.trim(), data, data.length() - 1, token, token::toString, () -> token.toString() + " ");
         }
     }
-
 }

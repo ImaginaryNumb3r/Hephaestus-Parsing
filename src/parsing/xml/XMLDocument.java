@@ -22,14 +22,14 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
     private final XMLProlog _prologue;
     private WhitespaceToken _prologueWhitespace;
     private final XMLComments _comments;
-    private final XMLTag _root;
+    private final XMLElement _root;
     private final WhitespaceToken _trailingWhitespace;
 
     public XMLDocument() {
         _prologue = new XMLProlog();
         _prologueWhitespace = new WhitespaceToken();
         _comments = new XMLComments();
-        _root = new XMLTag();
+        _root = new XMLElement();
         _trailingWhitespace = new WhitespaceToken();
     }
 
@@ -58,7 +58,7 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
         visit(_root, visitor);
     }
 
-    public void visit(XMLTag root, XMLVisitor visitor) {
+    public void visit(XMLElement root, XMLVisitor visitor) {
         visitor.visitTag(root);
 
         for (AttributeToken attribute : root.attributes()) {
@@ -100,7 +100,7 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
     @Override
     public XMLDocument deepCopy() {
         XMLDocument copy = new XMLDocument();
-        XMLTag rootCopy = _root.deepCopy();
+        XMLElement rootCopy = _root.deepCopy();
         XMLProlog prologCopy = _prologue.deepCopy();
 
         copy._root.setData(rootCopy);
@@ -115,7 +115,7 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
         return _prologue;
     }
 
-    public XMLTag getRoot() {
+    public XMLElement getRoot() {
         return _root;
     }
 
@@ -129,7 +129,7 @@ public final class XMLDocument extends AbstractParseNode implements CopyNode<XML
 
     @Override
     public void setData(XMLDocument other) {
-        XMLTag rootCopy = other._root.deepCopy();
+        XMLElement rootCopy = other._root.deepCopy();
         XMLProlog prologCopy = other._prologue.deepCopy();
 
         _root.setData(rootCopy);

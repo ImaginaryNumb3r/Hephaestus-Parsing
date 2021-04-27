@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * This node never returns invalid.
  * Grammar: T*
  */
-public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implements IterableList<T> {
+public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implements NodeList<T> {
     protected final List<T> _elements;
     protected final Supplier<T> _tokenConstructor;
 
@@ -55,6 +55,21 @@ public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implemen
 
     protected void reset() {
         _elements.clear();
+    }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    @Override
+    public int size() {
+        return _elements.size();
+    }
+
+    @Override
+    public T nodeAt(int index) {
+        return _elements.get(index);
     }
 
     public List<T> getElements() {

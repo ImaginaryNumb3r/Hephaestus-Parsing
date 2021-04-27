@@ -46,7 +46,7 @@ public class SpaceTokenTest extends XMLParseNodeTest {
         try {
             spaceToken.setSpace("");
             fail("Space Tokens cannot have empty strings as content");
-        } catch (IllegalArgumentException ex) {
+        } catch (TokenConditionException ex) {
             // Assertion succeeded.
         }
     }

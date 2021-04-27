@@ -14,23 +14,23 @@ import java.util.function.Consumer;
  */
 public interface XMLVisitor {
 
-    void visitAttribute(AttributeToken attributeToken, XMLTag tag);
+    void visitAttribute(AttributeToken attributeToken, XMLElement tag);
 
-    void visitTag(XMLTag tag);
+    void visitTag(XMLElement tag);
 
-    static XMLVisitor of (@NotNull BiConsumer<AttributeToken, XMLTag> attributeConsumer,
-                          @NotNull Consumer<XMLTag> tagConsumer
+    static XMLVisitor of (@NotNull BiConsumer<AttributeToken, XMLElement> attributeConsumer,
+                          @NotNull Consumer<XMLElement> tagConsumer
     ) {
         Contract.checkNulls(attributeConsumer, tagConsumer);
 
         return new XMLVisitor() {
             @Override
-            public void visitAttribute(AttributeToken attributeToken, XMLTag tag) {
+            public void visitAttribute(AttributeToken attributeToken, XMLElement tag) {
                 attributeConsumer.accept(attributeToken, tag);
             }
 
             @Override
-            public void visitTag(XMLTag tag) {
+            public void visitTag(XMLElement tag) {
                 tagConsumer.accept(tag);
             }
         };

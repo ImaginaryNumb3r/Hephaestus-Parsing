@@ -26,29 +26,28 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
     }
 
     @Override
-    public ParseResult parse(String chars, int start) {
-        char mandatoryChar = chars.charAt(start);
+    public ParseResult parse(String chars, final int start) {
+        ParseResult result = super.parse(chars, start);
 
-        if (!_acceptCondition.test(mandatoryChar)) {
-            String message = "Cannot parse mandatory char for Space token: \"" + mandatoryChar + "\"";
-            return ParseResult.invalid(start, message);
+        if (_buffer.length() == 0) {
+            char mandatoryChar = chars.charAt(result.index());
+            return ParseResult.notMatch(result.index(), "whitespace", Character.toString(mandatoryChar));
         }
-        _buffer.setCharAt(0, mandatoryChar);
-        ++start;
 
-        return super.parse(chars, start);
+        return result;
     }
 
     public void setSpace(char whitespace){
         setSpace(String.valueOf(whitespace));
     }
 
+    // TODO: Change to custom exception and catch in OptionalNode.
     public void setSpace(CharSequence whitespace){
         if (whitespace.length() == 0)
-            throw new IllegalArgumentException("Provided string must not be empty for space tokens");
+            throw new TokenConditionException("Provided string must not be empty for space tokens");
 
         if (!isBlank(whitespace))
-            throw new IllegalArgumentException("Provided string must be a whitespace for space tokens");
+            throw new TokenConditionException("Provided string must be a whitespace for space tokens");
 
         /*
          * IMPORTANT: We can't simply set he length to 0 and append the sequence

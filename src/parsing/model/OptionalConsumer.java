@@ -16,9 +16,9 @@ import java.util.Objects;
  */
 public class OptionalConsumer implements ParseNode, CharSequence {
     protected final StringBuilder _buffer;
-    /*package*/ final CharPredicate _acceptCondition;
+    protected final CharPredicate _acceptCondition;
 
-    /*package*/ OptionalConsumer(CharPredicate acceptCondition) {
+    protected OptionalConsumer(CharPredicate acceptCondition) {
         _buffer = new StringBuilder();
         _acceptCondition = acceptCondition;
     }
@@ -42,6 +42,16 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         _buffer.append(slice);
 
         return ParseResult.at(end);
+    }
+
+    /**
+     * The accepting condition is not copied because this method only sets the data.
+     * It does not change the behavior of the object.
+     * @param other
+     */
+    protected void setData(OptionalConsumer other) {
+        reset();
+        _buffer.append(other);
     }
 
     @Override
@@ -75,16 +85,6 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         copy._buffer.append(_buffer);
 
         return copy;
-    }
-
-    /**
-     * The accepting condition is not copied because this method only sets the data.
-     * It does not change the behavior of the object.
-     * @param other
-     */
-    protected void setData(OptionalConsumer other) {
-        reset();
-        _buffer.append(other);
     }
 
     protected void reset() {

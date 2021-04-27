@@ -15,20 +15,20 @@ import java.util.Optional;
  *          Whitespace [ CommentTag | '<' "Name" Attributes Whitespace ( ( '>' InnerNodes '</' "Name" '>' ) | '/>' ) ]
  * TODO: Turn Comment into separate Node
  */
-public final class XMLNode extends EitherNode<XMLTag, CommentToken> implements CopyNode<XMLNode>, Serializable {
+public final class XMLNode extends EitherNode<XMLElement, CommentToken> implements CopyNode<XMLNode>, Serializable {
     private final WhitespaceToken _leadingWhitespace;
 
     public XMLNode() {
         // Comment Token as fallback.
-        super(new XMLTag(), new CommentToken());
+        super(new XMLElement(), new CommentToken());
         _leadingWhitespace = new WhitespaceToken();
     }
 
-    public Optional<XMLTag> getTag() {
+    public Optional<XMLElement> getTag() {
         return first();
     }
 
-    /*package*/ XMLTag toTag() {
+    /*package*/ XMLElement toTag() {
         return first().get();
     }
 
@@ -49,7 +49,7 @@ public final class XMLNode extends EitherNode<XMLTag, CommentToken> implements C
     }
 
     @Override
-    public Optional<XMLTag> first() {
+    public Optional<XMLElement> first() {
         return super.first();
     }
 

@@ -1,5 +1,7 @@
 package parsing.model;
 
+import java.util.Objects;
+
 /**
  * A node tuple is a sequential combination of two arbitrary nodes.
  * It can be seen as a special case of the SequenceNode.
@@ -63,8 +65,8 @@ public class NodeTuple<First extends CopyNode<First>, Second extends CopyNode<Se
 
         NodeTuple<?, ?> nodeTuple = (NodeTuple<?, ?>) o;
 
-        if (_first != null ? !_first.equals(nodeTuple._first) : nodeTuple._first != null) return false;
-        return _second != null ? _second.equals(nodeTuple._second) : nodeTuple._second == null;
+        if (!Objects.equals(_first, nodeTuple._first)) return false;
+        return Objects.equals(_second, nodeTuple._second);
     }
 
     @Override

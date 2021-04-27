@@ -2,8 +2,7 @@ package parsing.xml;
 
 import parsing.model.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -11,21 +10,30 @@ import java.util.stream.Collectors;
  * Created: 20.03.2019
  * TODO: We can turn the "XMLAttributes" token into a one-or-more token.
  * Grammar: '<' Name (Space Attributes)? Whitespace
+ *
+ * ConditionalNodeTuple :> NodeTuple
+ * NodeTuple<SpaceToken, XMLAttributes>(ZeroOrOne)
+ * OptionalTuple<SpaceToken, XMLAttributes>
+ * OptionalNode<NodeTuple<SpaceToken, XMLAttributes>>
+ *
+ * OptionalNode<XMLAttributes>
+ *
  */
 public final class TagHeader extends AbstractParseNode implements CopyNode<TagHeader> {
     private final CharTerminal _terminal;
     private final ElementNameToken _name;
     // TODO: We only need that space, in case there are attributes. Otherwise, this is not necessary.
-    private final SpaceToken _space;
-    private final XMLAttributes _attributes;
+    // -> replace with OptionalSequenceNode
+    // private final SpaceToken _space;
+    private final OptionalNode<XMLAttributes> _attributes;
     private final WhitespaceToken _whitespace;
     private boolean _hasAttributes;
 
     public TagHeader() {
         _terminal = new CharTerminal('<');
         _name = new ElementNameToken();
-        _space = new SpaceToken();
-        _attributes = new XMLAttributes();
+        // _space = new SpaceToken();
+        _attributes = new OptionalNode<>(new XMLAttributes());
         _whitespace= new WhitespaceToken();
 
         _hasAttributes = false;
@@ -48,14 +56,15 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
         nextIndex = result.index();
 
         // Parse optional space + attributes token.
+        /*
         result = _space.parse(chars, nextIndex);
-        if (result.isValid()) {
+        if (result.isValid()) { */
             result = _attributes.parse(chars, result.index());
             if (result.isValid()) {
                 nextIndex = result.index();
                 _hasAttributes = true;
-            }
-        }
+            }/*
+        } */
 
         // Parse whitespace.
         result = _whitespace.parse(chars, nextIndex);
@@ -69,7 +78,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
     @Override
     public String toString() {
         String prefix = _terminal.toString() + _name.toString();
-        String attributes = _space.toString() + _attributes.toString();
+        String attributes = /* _space.toString() + */ _attributes.toString();
 
         return _hasAttributes
             ? prefix + attributes + _whitespace.toString()
@@ -85,14 +94,18 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
     }
 
     public List<AttributeToken> getAttributes() {
-        return _attributes.getElements().stream()
+        if (!_attributes.isPresent()) {
+            return new ArrayList<>();
+        }
+
+        return _attributes.get().getElements().stream()
             .map(NodeTuple::getFirst)
             .collect(Collectors.toList());
-    }
+    } /*
 
     public String getSpace() {
         return _space.toString();
-    }
+    } */
 
     public String getWhitespace() {
         return _whitespace.toString();
@@ -100,11 +113,11 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
 
     public void setWhitespace(CharSequence whitespace) {
         _whitespace.setWhitespace(whitespace);
-    }
+    } /*
 
     public void setSpace(CharSequence whitespace) {
         _space.setSpace(whitespace);
-    }
+    } */
 
     @Override
     public TagHeader deepCopy() {
@@ -117,7 +130,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
     @Override
     public void setData(TagHeader other) {
         _name.setData(other._name);
-        _space.setSpace(other._space);
+        // _space.setSpace(other._space);
         _attributes.setData(other._attributes);
         _whitespace.setWhitespace(other._whitespace.toString());
 
@@ -135,7 +148,7 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
         if (!(obj instanceof TagHeader)) return false;
         TagHeader other = (TagHeader) obj;
         return Objects.equals(_name, other._name) &&
-                Objects.equals(_space, other._space) &&
+                // Objects.equals(_space, other._space) &&
                 Objects.equals(_attributes, other._attributes) &&
                 Objects.equals(_hasAttributes, other._hasAttributes) &&
                 Objects.equals(_whitespace, other._whitespace);
@@ -143,6 +156,6 @@ public final class TagHeader extends AbstractParseNode implements CopyNode<TagHe
 
     @Override
     public int hashCode() {
-        return Objects.hash(_name, _space, _attributes, _whitespace, _hasAttributes);
+        return Objects.hash(_name, /* _space,*/ _attributes, _whitespace, _hasAttributes);
     }
 }

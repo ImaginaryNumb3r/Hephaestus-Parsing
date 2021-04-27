@@ -42,7 +42,7 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
         return result;
     }
 
-    protected boolean hasFirst() {
+    public boolean hasFirst() {
         return _status == Status.OPTIONAL;
     }
 
@@ -52,7 +52,7 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
                 : Optional.empty();
     }
 
-    protected boolean hasSecond() {
+    public boolean hasSecond() {
         return _status == Status.MANDATORY;
     }
 

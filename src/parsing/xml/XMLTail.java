@@ -11,6 +11,12 @@ import static java.util.Collections.emptyList;
  * Creator: Patrick
  * Created: 21.03.2019
  * Grammar: ( '>' InnerNodes '</' "Name" '>' ) | '/>'
+ *
+ * TODO: Completely refactor XMLHeader + Tail into:
+ *  - XMLElement:
+ *      - XmlTag1 Nodes XmlTag2: where XmlTag1 is open and XmlTag2 is closing
+ *      - XmlTag: where XmlTag is closed
+ * - XMLTag: '<' ElementNameToken (Spacetoken XmlAttributes)? Whitespacetoken '>' | '/>'
  */
 public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
     private static final StringTerminal FALLBACK = new StringTerminal("/>");
@@ -49,7 +55,7 @@ public final class XMLTail extends SequenceNode implements CopyNode<XMLTail> {
     /**
      * @return the list of child tags. This does not include comments.
      */
-    public List<XMLTag> childTags() {
+    public List<XMLElement> childTags() {
         return nodes().stream()
                 .filter(XMLNode::isTag)
                 .map(XMLNode::toTag)
