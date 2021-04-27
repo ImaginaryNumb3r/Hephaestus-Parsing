@@ -9,11 +9,11 @@ import static java.lang.Double.parseDouble;
  */
 public class Attributes {
 
-    public static double getDouble(XMLTag tag, String attributeName) {
+    public static double getDouble(XMLElement tag, String attributeName) {
         return fetchDouble(tag, attributeName).orElseThrow();
     }
 
-    public static OptionalDouble fetchDouble(XMLTag tag, String attributeName) {
+    public static OptionalDouble fetchDouble(XMLElement tag, String attributeName) {
         AttributeToken token = tag.getAttribute(attributeName);
         return fetchDouble(token);
     }

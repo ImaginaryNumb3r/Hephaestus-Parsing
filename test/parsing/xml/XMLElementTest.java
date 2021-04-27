@@ -9,7 +9,7 @@ import java.util.List;
  * Created: 21.03.2019
  * Purpose:
  */
-public class XMLTagTest extends XMLParseNodeTest {
+public class XMLElementTest extends XMLParseNodeTest {
     public static final List<String> TEST_DATA;
 
     static {
@@ -19,7 +19,7 @@ public class XMLTagTest extends XMLParseNodeTest {
     @Test
     public void testParse() {
         for (String data : TEST_DATA) {
-            XMLTag token = new XMLTag();
+            XMLElement token = new XMLElement();
 
             checkParse(data, data, token, token::toString);
         }

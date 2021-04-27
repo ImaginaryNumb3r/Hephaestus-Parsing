@@ -1,5 +1,7 @@
 package parsing.xml;
 
+import essentials.contract.NoImplementationException;
+
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -26,7 +28,8 @@ public interface XMLStream<T, Stream extends XMLStream<T, Stream>> {
 
     T[] toArray(IntFunction<T[]> arrayConstructor);
 
-    static TagStream of(XMLTag tag) {
-        return tag.stream();
+    static TagStream of(XMLElement tag) {
+        throw new NoImplementationException();
+        // return tag.stream();
     }
 }

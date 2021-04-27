@@ -27,7 +27,7 @@ public class XMLNodeTest extends XMLParseNodeTest {
 
     @Test
     public void testParseTags() {
-        for (String tag : XMLTagTest.TEST_DATA) {
+        for (String tag : XMLElementTest.TEST_DATA) {
             XMLNode token = new XMLNode();
 
             checkParse(tag, tag, token, token::toString);
