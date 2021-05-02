@@ -63,7 +63,7 @@ public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStart
         _name = other._name;
         _whitespace = other._whitespace;
         _attributes = other._attributes;
-
+        _postfix = other._postfix;
     }
 
     @Override

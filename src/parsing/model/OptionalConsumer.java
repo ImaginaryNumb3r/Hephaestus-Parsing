@@ -45,7 +45,7 @@ public class OptionalConsumer implements ParseNode, CharSequence {
     }
 
     public boolean isEmpty() {
-        return _buffer.length() != 0;
+        return _buffer.length() == 0;
     }
 
     /**
