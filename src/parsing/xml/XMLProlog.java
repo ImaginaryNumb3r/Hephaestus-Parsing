@@ -22,12 +22,10 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
     public XMLProlog() {
         super(new ArrayList<>());
 
-        // _space = new SpaceToken();
         _attributes = new XMLAttributes();
         _trailingWhitespace = new WhitespaceToken();
         _sequence.addAll(Arrays.asList(
                 new StringTerminal(START_TERMINAL),
-                // _space,
                 _attributes,
                 _trailingWhitespace,
                 new StringTerminal(END_TERMINAL)
@@ -37,11 +35,9 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
     @Override
     public XMLProlog deepCopy() {
         XMLProlog copy = new XMLProlog();
-        // SpaceToken spaceCopy = _space.deepCopy();
         XMLAttributes attributesCopy = _attributes.deepCopy();
         WhitespaceToken whitespaceCopy = _trailingWhitespace.deepCopy();
 
-        // copy._space.setData(spaceCopy);
         copy._attributes.setData(attributesCopy);
         copy._trailingWhitespace.setData(whitespaceCopy);
 
@@ -51,7 +47,6 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
     @Override
     public void setData(XMLProlog other) {
         super.setData(other);
-        // _space.setData(other._space);
         _attributes.setData(other._attributes);
         _trailingWhitespace.setData(other._trailingWhitespace);
 
@@ -67,7 +62,6 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
         if (!super.equals(obj)) return false;
         XMLProlog other = (XMLProlog) obj;
         return Objects.equals(_attributes, other._attributes) &&
-            // Objects.equals(_space, other._space) &&
                 Objects.equals(_trailingWhitespace, other._trailingWhitespace);
     }
 
@@ -78,8 +72,6 @@ public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog>
 
     @Override
     public String toString() {
-        return START_TERMINAL /*+ _space.toString() */
-            + _attributes.toString()
-            + _trailingWhitespace.toString() + END_TERMINAL;
+        return START_TERMINAL + _attributes.toString() + _trailingWhitespace.toString() + END_TERMINAL;
     }
 }

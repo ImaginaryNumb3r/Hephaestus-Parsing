@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Creator: Patrick
  * Created: 22.03.2019
- * The text that can be between nodes
+ * The text that can be between nodes.
  */
 public final class XMLText extends ContentNode implements CopyNode<XMLText> {
     private static final String POSTFIX = "<";
@@ -46,11 +46,6 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
                 }
             }
         }
-
-
-        // TODO: Remove and turn into a general rule for content token at consume-time.
-
-        // if (nextIndex != result.index()) throw new IllegalStateException("TODO");
 
         return result;
     }

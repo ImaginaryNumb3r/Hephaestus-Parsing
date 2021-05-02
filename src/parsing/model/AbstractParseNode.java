@@ -3,16 +3,6 @@ package parsing.model;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * TODO: What to do if
- * Phases:
- *  - Universal Preconditions
- *  - Preconditions
- *  - Full parse
- *  - Set Data
- *
- *  Nodes: OneOrMore <  Multinode
- *
- *
  */
 public abstract class AbstractParseNode implements ParseNode {
 

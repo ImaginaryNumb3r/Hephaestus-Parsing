@@ -1,6 +1,5 @@
 package parsing.xml;
 
-import essentials.contract.NoImplementationException;
 import parsing.model.AbstractParseNode;
 import parsing.model.CopyNode;
 import parsing.model.ParseResult;
@@ -17,9 +16,9 @@ import java.util.stream.Collectors;
  */
 public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement> {
     private final XMLStartTag _start;
-    private InnerNodes _nodes; // optional
-    private WhitespaceToken _whitespace; // optional
-    private XMLCloseTag _close; // optional <- we only need this for parsing, we can get rid of it afterwards
+    private InnerNodes _nodes;
+    private WhitespaceToken _whitespace;
+    private XMLCloseTag _close;
 
     public XMLElement() {
         _start = new XMLStartTag();
@@ -33,12 +32,13 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
     }
 
     /**
-     * Only returns the first attribute with this name.
-     * @param name
-     * @return
+     * @return the attribute with this name or null if no such attribute exists.
      */
     public AttributeToken getAttribute(String name) {
-        throw new NoImplementationException("TODO!");
+        return attributes().stream()
+            .filter(attr -> attr.getName().equals(name))
+            .findFirst()
+            .orElse(null);
     }
 
     public List<AttributeToken> attributes() {
