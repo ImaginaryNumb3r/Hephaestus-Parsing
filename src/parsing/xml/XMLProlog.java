@@ -10,6 +10,7 @@ import java.util.Objects;
  * Creator: Patrick
  * Created: 25.03.2019
  * Grammar: '<?xml' Attributes '?>'
+ * TODO: Major Issue - the elements in sequence nodes must always be in sync with the fields.
  */
 public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog> {
     private static final String START_TERMINAL = "<?xml";

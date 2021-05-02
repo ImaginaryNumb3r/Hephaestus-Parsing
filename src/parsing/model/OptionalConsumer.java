@@ -44,6 +44,10 @@ public class OptionalConsumer implements ParseNode, CharSequence {
         return ParseResult.at(end);
     }
 
+    public boolean isEmpty() {
+        return _buffer.length() != 0;
+    }
+
     /**
      * The accepting condition is not copied because this method only sets the data.
      * It does not change the behavior of the object.

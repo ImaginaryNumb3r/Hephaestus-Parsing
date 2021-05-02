@@ -14,21 +14,29 @@ import java.util.stream.Collectors;
  */
 public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStartTag> /*, XMLStreamable*/  {
     private final CharTerminal _prefix;
-    private final ElementNameToken _name;
-    private final WhitespaceToken _whitespace;
-    private final OptionalNode<XMLAttributes> _attributes;
-    private final EitherNode<CharTerminal, StringTerminal> _postfix;
+    private ElementNameToken _name;
+    private OptionalNode<XMLAttributes> _attributes;
+    private WhitespaceToken _whitespace;
+    private EitherNode<CharTerminal, StringTerminal> _postfix;
 
     protected XMLStartTag() {
-        _prefix = new CharTerminal('<');
-        _name = new ElementNameToken();
-        _whitespace = new WhitespaceToken();
-        _attributes = new OptionalNode<>(new XMLAttributes());
-        _postfix = new EitherNode<>(new CharTerminal('>'), new StringTerminal("/>"));
-
-        _sequence.addAll(Arrays.asList(_prefix, _name, _attributes, _whitespace, _postfix));
+        this(
+            new CharTerminal('<'),
+            new ElementNameToken(),
+            new OptionalNode<>(new XMLAttributes()),
+            new WhitespaceToken(),
+            new EitherNode<>(new CharTerminal('>'), new StringTerminal("/>"))
+        );
     }
 
+    public XMLStartTag(CharTerminal prefix, ElementNameToken name, OptionalNode<XMLAttributes> attributes, WhitespaceToken whitespace, EitherNode<CharTerminal, StringTerminal> postfix) {
+        super(Arrays.asList(prefix, name, attributes, whitespace, postfix));
+        _prefix = prefix;
+        _name = name;
+        _whitespace = whitespace;
+        _attributes = attributes;
+        _postfix = postfix;
+    }
 
     public ElementNameToken getName() {
         return _name;
@@ -52,13 +60,21 @@ public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStart
     @Override
     public void setData(XMLStartTag other) {
         super.setData(other);
+        _name = other._name;
+        _whitespace = other._whitespace;
+        _attributes = other._attributes;
+
     }
 
     @Override
     public XMLStartTag deepCopy() {
-        XMLStartTag copy = new XMLStartTag();
-        copy.setData(this);
-
-        return copy;
+        // copy.setData(this);
+        return new XMLStartTag(
+            _prefix,
+            _name,
+            _attributes,
+            _whitespace,
+            _postfix
+        );
     }
 }

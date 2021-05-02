@@ -60,7 +60,7 @@ public class SequenceNode extends AbstractParseNode implements IterableList<Pars
     }
 
     protected void setData(SequenceNode other) {
-        _sequence.clear();
+            _sequence.clear();
         var sequenceCopy = other._sequence.stream()
                 .map(ParseNode::deepCopy)
                 .collect(Collectors.toList());

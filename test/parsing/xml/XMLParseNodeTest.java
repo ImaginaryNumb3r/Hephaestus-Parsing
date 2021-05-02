@@ -52,7 +52,7 @@ public class XMLParseNodeTest {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Cannot initialize Test: " + ClosedTagTest.class);
+            throw new RuntimeException("Cannot initialize Test: " + XMLParseNodeTest.class);
         }
 
         return samples;

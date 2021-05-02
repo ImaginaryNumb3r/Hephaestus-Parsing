@@ -49,7 +49,9 @@ public final class XMLAttributes extends OneOrMoreNode<NodeTuple<AttributeToken,
     @Override
     public void setData(XMLAttributes other) {
         _elements.clear();
-        _space.setData(other._space);
+        if (!other._space.isEmpty()) {
+            _space.setData(other._space);
+        }
 
         var elementsCopy = other._elements.stream()
                 .map(NodeTuple::deepCopy)

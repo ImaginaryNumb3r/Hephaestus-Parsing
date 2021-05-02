@@ -16,14 +16,17 @@ public final class AttributeToken extends SequenceNode implements CopyNode<Attri
     private final ContentNode _value;
 
     public AttributeToken() {
-        _name = new ElementNameToken();
-        _value = new ContentNode("\"");
+        this(new ElementNameToken(), new ContentNode("\""));
+    }
 
-        _sequence.addAll(
-            Arrays.asList(
-                _name, new WhitespaceToken(), new CharTerminal('='), new WhitespaceToken(), _value
-            )
-        );
+    public AttributeToken(ElementNameToken name, ContentNode value) {
+        super(Arrays.asList(
+            name, new WhitespaceToken(),
+            new CharTerminal('='), new WhitespaceToken(),
+            value
+        ));
+        _name = name;
+        _value = value;
     }
 
     public String getName() {
