@@ -4,8 +4,10 @@ import java.util.Optional;
 
 /**
  * @author Patrick Plieschnegger
+ * TODO: Basic Test
  */
-public class OptionalNode<N extends CopyNode<N>> extends EitherNode<N, Epsilon> {
+public class OptionalNode<N extends CopyNode<N>>
+    extends EitherNode<N, Epsilon> implements CopyNode<OptionalNode<N>> {
 
     public OptionalNode(N optional) {
         super(optional, Epsilon.instance());
@@ -38,12 +40,12 @@ public class OptionalNode<N extends CopyNode<N>> extends EitherNode<N, Epsilon> 
         return hasFirst();
     }
 
-    protected void setData(N data) {
+    public void setData(N data) {
         super.setData(new OptionalNode<>(data));
     }
 
     @Override
-    public void setData(EitherNode<N, Epsilon> other) {
+    public void setData(OptionalNode<N> other) {
         if (other.hasFirst()) {
             super.setData(other);
         }
@@ -53,5 +55,18 @@ public class OptionalNode<N extends CopyNode<N>> extends EitherNode<N, Epsilon> 
     public boolean equals(Object o) {
         // Don't compare if the
         return !isPresent() || super.equals(o);
+    }
+
+    @Override
+    public OptionalNode<N> deepCopy() {
+        OptionalNode<N> copy = new OptionalNode<>(_optional);
+        copy.setData(this);
+
+        return copy;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

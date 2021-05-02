@@ -22,7 +22,7 @@ public final class CharTerminal extends AbstractParseNode implements CopyNode<Ch
             return ParseResult.at(index + 1);
         } else {
             String message = "Character " + character + " does not match " + _character + " at index: " + index;
-            return ParseResult.invalid(index, message);
+            return ParseResult.invalid(index, message, this);
         }
     }
 

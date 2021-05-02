@@ -7,6 +7,7 @@ import java.util.Objects;
  * It can be seen as a special case of the SequenceNode.
  *
  * Grammar: First Second
+ *
  */
 public class NodeTuple<First extends CopyNode<First>, Second extends CopyNode<Second>>
         extends AbstractParseNode implements CopyNode<NodeTuple<First, Second>> {

@@ -1,32 +1,52 @@
 package parsing.xml;
 
-import essentials.contract.NoImplementationException;
-import essentials.functional.Accumulator;
 import parsing.model.*;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Grammar: TagHeader XMLTail
+ * Grammar: '<' ElementNameToken (Spacetoken XmlAttributes)? Whitespacetoken '>' | '/>'
  */
-public final class XMLStartTag extends AbstractXMLTag<XMLStartTag> /*, XMLStreamable*/  {
+public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStartTag> /*, XMLStreamable*/  {
+    private final CharTerminal _prefix;
+    private final ElementNameToken _name;
+    private final WhitespaceToken _whitespace;
+    private final OptionalNode<XMLAttributes> _attributes;
+    private final EitherNode<CharTerminal, StringTerminal> _postfix;
 
     protected XMLStartTag() {
-        super(
-            new CharTerminal('<'),
-            new EitherNode<>(new CharTerminal('>'), new StringTerminal("/>"))
-        );
+        _prefix = new CharTerminal('<');
+        _name = new ElementNameToken();
+        _whitespace = new WhitespaceToken();
+        _attributes = new OptionalNode<>(new XMLAttributes());
+        _postfix = new EitherNode<>(new CharTerminal('>'), new StringTerminal("/>"));
+
+        _sequence.addAll(Arrays.asList(_prefix, _name, _attributes, _whitespace, _postfix));
+    }
+
+
+    public ElementNameToken getName() {
+        return _name;
+    }
+
+    public WhitespaceToken getWhitespace() {
+        return _whitespace;
     }
 
     public List<AttributeToken> attributes() {
-        throw new NoImplementationException("TODO!");
+        return  _attributes.fetch().stream()
+            .map(XMLAttributes::attributes)
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
     }
 
     public boolean isOpen() {
-        return ((EitherNode<?, ?>) _postfix).hasFirst();
+        return _postfix.hasFirst();
     }
 
     @Override

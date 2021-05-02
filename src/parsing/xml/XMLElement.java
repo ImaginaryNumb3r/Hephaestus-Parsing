@@ -3,15 +3,12 @@ package parsing.xml;
 import essentials.contract.NoImplementationException;
 import parsing.model.AbstractParseNode;
 import parsing.model.CopyNode;
-import parsing.model.ParseNode;
 import parsing.model.ParseResult;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Patrick Plieschnegger
@@ -31,7 +28,7 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
     }
 
     public String getName() {
-        return _start._name.asString();
+        return _start.getName().asString();
     }
 
     /**
@@ -101,7 +98,10 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
     @Override
     public void setData(XMLElement other) {
         _start.setData(other._start);
-        if (_start.isOpen()) {
+        if (other._start.isOpen()) {
+            _nodes = new InnerNodes();
+            _close = new XMLCloseTag();
+
             _nodes.setData(other._nodes);
             _close.setData(other._close);
         }

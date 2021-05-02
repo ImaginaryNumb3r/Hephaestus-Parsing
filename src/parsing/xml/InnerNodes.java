@@ -35,7 +35,7 @@ public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<Inn
         // Fallback to parsing the node value as a string.
         else {
             ParseResult fallback = _text.parse(chars, index);
-            if (fallback.isInvalid()) return ParseResult.invalid(index, "TODO", result, fallback);
+            if (fallback.isInvalid()) return ParseResult.invalid(index, "TODO", this, result, fallback);
 
             result = fallback;
             _status = Status.TEXT;

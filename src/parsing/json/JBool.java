@@ -34,7 +34,7 @@ public final class JBool extends AbstractParseNode implements CopyNode<JBool> {
             nextIndex = tryParse(chars, TRUE, index);
             _value = true;
 
-            if (nextIndex == INVALID) return ParseResult.invalid(index, "Cannot parse bool value");
+            if (nextIndex == INVALID) return ParseResult.invalid(index, "Cannot parse bool value", this);
         }
 
         _parsed = true;

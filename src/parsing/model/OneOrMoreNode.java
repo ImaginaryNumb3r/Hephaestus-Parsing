@@ -17,10 +17,11 @@ public class OneOrMoreNode<T extends CopyNode<T>> extends MultiNode<T> {
 
         var result = mandatoryToken.parse(chars, index);
         if (result.isValid()) {
-            _elements.add(mandatoryToken);
-
             result = super.parseImpl(chars, result.index());
         }
+
+        // Calling "parseImpl" will clear the elements, which is why we need to append the first token afterwards.
+        _elements.add(0, mandatoryToken);
 
         return result;
     }

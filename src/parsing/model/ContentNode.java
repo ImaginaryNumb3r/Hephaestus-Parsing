@@ -54,11 +54,12 @@ public class ContentNode extends AbstractParseNode {
 
             if (index == chars.length()) {
                 String message = "Exhausted the string in the look for the postfix";
-                return ParseResult.invalid(index, message);
+                return ParseResult.invalid(index, message, this);
             }
             ++index;
         }
 
+        _buffer.setLength(0);
         _buffer.append(chars, start, index - 1);
 
         return result;
@@ -82,11 +83,15 @@ public class ContentNode extends AbstractParseNode {
             char expectedChar = expected.charAt(offset);
 
             if (nextIndex >= chars.length()) {
-                return ParseResult.invalid(nextIndex, "Matching failed for pattern \"" + expected +"\". End of document.");
+                return ParseResult.invalid(nextIndex, "Matching failed for pattern \"" + expected +"\". End of document.", this);
             }
             char actualChar = chars.charAt(nextIndex);
 
-            if (expectedChar != actualChar) return ParseResult.invalid(nextIndex, "Matching failed for pattern \"" + expected +"\".");
+            if (expectedChar != actualChar) {
+                String parsed = chars.substring(index, nextIndex + 1);
+                String message = "Failed to match pattern \"" + expected + "\" with \"" + parsed + "\".";
+                return ParseResult.invalid(nextIndex, message, this);
+            }
         }
 
         return ParseResult.at(index + offset);

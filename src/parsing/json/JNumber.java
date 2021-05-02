@@ -51,7 +51,7 @@ public final class JNumber extends AbstractParseNode implements CopyNode<JNumber
     protected ParseResult parseImpl(String chars, final int index) {
         char ch = chars.charAt(index);
         if (!canParse(ch)) {
-            return ParseResult.invalid(index, "Cannot parse as value at index: " + index);
+            return ParseResult.invalid(index, "Cannot parse as value at index: " + index, this);
         }
 
         var buffer = new StringBuilder();
@@ -74,7 +74,7 @@ public final class JNumber extends AbstractParseNode implements CopyNode<JNumber
             _string = numberStr;
             _isRealNumber = isARealNumber();
         } catch (NumberFormatException ex) {
-            return ParseResult.invalid(index, "cannot parse as number: " + numberStr);
+            return ParseResult.invalid(index, "cannot parse as number: " + numberStr, this);
         }
 
         return ParseResult.at(nextIndex);

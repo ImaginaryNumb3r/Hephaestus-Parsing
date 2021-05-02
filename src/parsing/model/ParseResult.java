@@ -9,26 +9,36 @@ import java.util.*;
  * Creator: Patrick
  * Created: 26.03.2019
  * TODO: On an error, you should also get the class that was responsible.
+ * TODO: Delegate the error related code into a separate "Parse Error" class.
  */
 public final class ParseResult {
     private final int _cursorPosition;
     private final String _message;
     private final boolean _isValid;
     private final List<ParseResult> _innerErrors;
+    private final Class<? extends ParseNode> _errorSource;
 
+    /**
+     * Constructor for creating valid ParseResults
+     */
     public ParseResult(int cursorPosition, String message, boolean isValid) {
-        this(cursorPosition, message, isValid, new ArrayList<>());
+        this(cursorPosition, message, isValid, new ArrayList<>(), null);
     }
 
+    /**
+     * Constructor for creating invalid ParseResults
+     */
     public ParseResult(int cursorPosition,
                        String message,
                        boolean isValid,
-                       Collection<ParseResult> innerErrors
+                       Collection<ParseResult> innerErrors,
+                       Class<? extends ParseNode> errorSource
     ) {
         _cursorPosition = cursorPosition;
         _message = message;
         _isValid = isValid;
         _innerErrors = new ArrayList<>(innerErrors);
+        _errorSource = errorSource;
     }
 
     public List<ParseResult> innerErrors() {
@@ -63,18 +73,27 @@ public final class ParseResult {
         return _cursorPosition;
     }
 
-    public static ParseResult invalid(int index, @NotNull String message) {
-        return invalid(index, message, Collections.emptyList());
+    public static ParseResult invalid(int index, @NotNull String message, ParseNode source) {
+        return invalid(index, message, Collections.emptyList(), source);
     }
 
-    public static ParseResult invalid(int index, @NotNull String message, Collection<ParseResult> innerExceptions) {
+    public static ParseResult invalid(
+        int index, @NotNull String message, Collection<ParseResult> innerExceptions, ParseNode errorSource
+    ) {
         Contract.checkNull(message, "message");
 
-        return new ParseResult(index, message, false, innerExceptions);
+        return new ParseResult(index, message, false, innerExceptions, errorSource.getClass());
     }
 
-    public static ParseResult invalid(int index, @NotNull String message, ParseResult... innerExceptions) {
-        return invalid(index, message, Arrays.asList(innerExceptions));
+    public static ParseResult invalid(
+        int index, @NotNull String message,
+        ParseNode errorSource, ParseResult... innerExceptions
+    ) {
+        return invalid(index, message, Arrays.asList(innerExceptions), errorSource);
+    }
+
+    public Class<? extends ParseNode> getErrorSource() {
+        return _errorSource;
     }
 
     public static ParseResult notMatch(int index, char expected, char actual) {
@@ -96,6 +115,6 @@ public final class ParseResult {
 
     @Override
     public String toString() {
-        return isValid() ? "Index: " + _cursorPosition : "Invalid";
+        return isValid() ? "Index: " + _cursorPosition : "Invalid for reason: " + _message;
     }
 }

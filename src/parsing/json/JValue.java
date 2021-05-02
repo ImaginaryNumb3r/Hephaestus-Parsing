@@ -44,7 +44,7 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
             }
         }
 
-        return ParseResult.invalid(index, "Cannot parse Json value");
+        return ParseResult.invalid(index, "Cannot parse Json value", this);
     }
 
     public JValueType getType() {

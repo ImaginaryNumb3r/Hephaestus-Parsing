@@ -24,11 +24,11 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
         ParseResult result = super.parseImpl(chars, index);
         if (result.isInvalid()) return result;
 
-        // Revert lookahead.
+        // Revert lookahead of postfix.
         result = ParseResult.at(result.index() - POSTFIX.length());
         var next = result;
 
-        // Hack: Also append comments. The grammar does not support it yet.
+        // HACK: Also append comments. The grammar does not support it yet.
         while (next.isValid()) {
             CommentToken comment = new CommentToken();
             next = comment.parse(chars, next.index());

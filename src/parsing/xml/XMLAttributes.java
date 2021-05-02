@@ -2,6 +2,7 @@ package parsing.xml;
 
 import parsing.model.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,12 @@ public final class XMLAttributes extends OneOrMoreNode<NodeTuple<AttributeToken,
         int nextIndex = parse.index();
 
         return super.parseImpl(chars, nextIndex);
+    }
+
+    public List<AttributeToken> attributes() {
+        return _elements.stream()
+            .map(NodeTuple::getFirst)
+            .collect(Collectors.toList());
     }
 
     @Override

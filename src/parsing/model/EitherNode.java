@@ -10,11 +10,12 @@ import java.util.Optional;
  * Created: 20.03.2019
  * Grammar: O | M
  * @apiNote must always parse either O or M to have valid state.
+ * TODO: Make simple unit tests
  */
 public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends AbstractParseNode {
-    private final O _optional;
-    private final M _mandatory;
-    private Status _status;
+    protected final O _optional;
+    protected final M _mandatory;
+    protected Status _status;
 
     public EitherNode(O optional, M mandatory) {
         _optional = optional;
@@ -35,7 +36,7 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
                 _status = Status.MANDATORY;
                 result = mandatory;
             } else {
-                result = ParseResult.invalid(index, "Could not consume either node", result, mandatory);
+                result = ParseResult.invalid(index, "Could not consume either node", this, result, mandatory);
             }
         }
 
@@ -78,10 +79,13 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
         O optionalCopy = _optional.deepCopy();
         M mandatoryCopy = _mandatory.deepCopy();
 
-        return new EitherNode<>(optionalCopy, mandatoryCopy);
+        EitherNode<O, M> copy = new EitherNode<>(optionalCopy, mandatoryCopy);
+        copy._status = _status;
+
+        return copy;
     }
 
-    protected void setData(EitherNode<O, M> other) {
+    public void setData(EitherNode<O, M> other) {
         if (_mandatory != null) {
             _mandatory.setData(other._mandatory);
         }
