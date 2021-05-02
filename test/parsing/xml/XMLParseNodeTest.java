@@ -1,6 +1,7 @@
 package parsing.xml;
 
 import parsing.model.ParseNode;
+import parsing.model.ParseResult;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -83,6 +84,8 @@ public class XMLParseNodeTest {
         ParseNode copy = token.deepCopy();
         assertEquals(message, token, copy);
 
-        // TODO: Test repeated parsings.
+        message = "Repeated parsing creates non-identical copies for: " + token.getClass().getName();
+        copy.parse(data, 0);
+        assertEquals(message, token, copy);
     }
 }

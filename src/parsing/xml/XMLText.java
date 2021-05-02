@@ -85,7 +85,7 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
     @Override
     public XMLText deepCopy() {
         XMLText copy = new XMLText();
-        setContent(_buffer);
+        copy.setContent(_buffer);
 
         return copy;
     }
