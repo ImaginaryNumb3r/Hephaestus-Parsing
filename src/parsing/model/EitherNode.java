@@ -76,11 +76,8 @@ public class EitherNode<O extends CopyNode<O>, M extends CopyNode<M>> extends Ab
 
     @Override
     public EitherNode<O, M> deepCopy() {
-        O optionalCopy = _optional.deepCopy();
-        M mandatoryCopy = _mandatory.deepCopy();
-
-        EitherNode<O, M> copy = new EitherNode<>(optionalCopy, mandatoryCopy);
-        copy._status = _status;
+        EitherNode<O, M> copy = new EitherNode<>(_optional.deepCopy(), _mandatory.deepCopy());
+        copy.setData(this);
 
         return copy;
     }

@@ -82,5 +82,7 @@ public class XMLParseNodeTest {
         message = "Asserting that a copy is equal failed for: " + token.getClass().getName();
         ParseNode copy = token.deepCopy();
         assertEquals(message, token, copy);
+
+        // TODO: Test repeated parsings.
     }
 }

@@ -46,21 +46,30 @@ public class OptionalNode<N extends CopyNode<N>>
 
     @Override
     public void setData(OptionalNode<N> other) {
-        if (other.hasFirst()) {
-            super.setData(other);
+        switch (other._status) {
+            case OPTIONAL:
+                super.setData(other);
+                break;
+            case MANDATORY:
+                _status = Status.MANDATORY;
+                break;
+            case NONE:
+                _status = Status.NONE;
         }
     }
 
     @Override
-    public boolean equals(Object o) {
-        // Don't compare if the
-        return !isPresent() || super.equals(o);
+    public boolean equals(Object obj) {
+        if (!(obj instanceof OptionalNode)) return false;
+        OptionalNode<N> other = (OptionalNode<N>) obj;
+
+        return (!isPresent() && !other.isPresent()) || super.equals(other);
     }
 
     @Override
     public OptionalNode<N> deepCopy() {
-        OptionalNode<N> copy = new OptionalNode<>(_optional);
-        copy.setData(this);
+        OptionalNode<N> copy = new OptionalNode<>(_optional.deepCopy());
+        copy._status = _status;
 
         return copy;
     }

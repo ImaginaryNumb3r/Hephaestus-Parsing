@@ -40,13 +40,8 @@ public final class XMLAttributes extends OneOrMoreNode<NodeTuple<AttributeToken,
 
     @Override
     public XMLAttributes deepCopy() {
-        var elements = _elements.stream()
-                .map(CopyNode::deepCopy)
-                .collect(Collectors.toList());
-
         XMLAttributes copy = new XMLAttributes();
-        copy._space.setData(_space);
-        copy._elements.addAll(elements);
+        copy.setData(this);
 
         return copy;
     }

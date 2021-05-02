@@ -39,7 +39,8 @@ public final class CharTerminal extends AbstractParseNode implements CopyNode<Ch
     @Deprecated
     @Override
     public void setData(CharTerminal other) {
-        throw new UnsupportedOperationException("Cannot mutate terminal tokens.");
+        if (_character != other._character)
+            throw new UnsupportedOperationException("Cannot mutate terminal tokens.");
     }
 
     @Override

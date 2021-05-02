@@ -21,18 +21,18 @@ public class InnerNodesTest extends XMLParseNodeTest {
     public void testParse() {
         String comment = TEST_DATA.get(0);
         String expected = "<!-- Comment -->";
-        InnerNodes nodes = new InnerNodes(); /*
+        InnerNodes nodes = new InnerNodes();
         checkParse(expected, comment, nodes, nodes::toString);
 
         assertFalse(nodes.getElements().isEmpty());
         XMLNode node = nodes.getElements().get(0);
-        assertTrue(node.isComment()); */
+        assertTrue(node.isComment());
 
-        String string = TEST_DATA.get(1); /*
+        String string = TEST_DATA.get(1);
         expected = "Text aoiweu!\"30912 <!-- -->";
         var innerNodes = new InnerNodes();
         Supplier<String> actual = () -> innerNodes.getData().get() + "</";
-        checkParse(expected, string, expected.length(), innerNodes, () -> innerNodes.getData().get(), actual); */
+        checkParse(expected, string, expected.length(), innerNodes, () -> innerNodes.getData().get(), actual);
 
         string = TEST_DATA.get(2);
         expected = string;
