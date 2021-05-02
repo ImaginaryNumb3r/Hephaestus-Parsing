@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Creator: Patrick
  * Created: 20.03.2019
- * Grammar: '<' ElementNameToken (Spacetoken XmlAttributes)? Whitespacetoken '>' | '/>'
+ * Grammar: '<' ElementNameToken (Spacetoken XmlAttributes)? Whitespacetoken ('>' { isOpen=true } | '/>' )
  */
 public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStartTag> /*, XMLStreamable*/  {
     private final CharTerminal _prefix;

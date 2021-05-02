@@ -27,7 +27,7 @@ public final class StringTerminal extends AbstractParseNode implements CopyNode<
         for (char expected : _terminal.toCharArray()) {
             char ch = chars.charAt(index + offset++);
 
-            if (ch != expected) return ParseResult.notMatch(index + offset, expected, ch);
+            if (ch != expected) return ParseResult.notMatch(index + offset, expected, ch, this);
         }
 
         return ParseResult.at(index + offset);

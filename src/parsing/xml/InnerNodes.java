@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * Creator: Patrick
  * Created: 22.03.2019
  * Grammar: ( XMLNode )* | XMLText
+ * In theory, this could become an EitherNode<MultiNode<XMLNode>, XMLText> but do we want to?
  */
 public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<InnerNodes> {
     private final XMLText _text;

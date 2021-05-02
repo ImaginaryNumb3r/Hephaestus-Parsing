@@ -18,16 +18,18 @@ public final class ParseResult {
     private final List<ParseResult> _innerErrors;
     private final Class<? extends ParseNode> _errorSource;
 
-    /**
-     * Constructor for creating valid ParseResults
-     */
     public ParseResult(int cursorPosition, String message, boolean isValid) {
         this(cursorPosition, message, isValid, new ArrayList<>(), null);
     }
 
-    /**
-     * Constructor for creating invalid ParseResults
-     */
+    public ParseResult(
+        int cursorPosition,
+        String message,
+        boolean isValid, Class<? extends ParseNode> errorSource
+    ) {
+        this(cursorPosition, message, isValid, new ArrayList<>(), errorSource);
+    }
+
     public ParseResult(int cursorPosition,
                        String message,
                        boolean isValid,
@@ -96,16 +98,16 @@ public final class ParseResult {
         return _errorSource;
     }
 
-    public static ParseResult notMatch(int index, char expected, char actual) {
-        return notMatch(index, Character.toString(expected), Character.toString(actual));
+    public static ParseResult notMatch(int index, char expected, char actual, ParseNode errorSource) {
+        return notMatch(index, Character.toString(expected), Character.toString(actual), errorSource);
     }
 
-    public static ParseResult notMatch(int index, String expected, String actual) {
+    public static ParseResult notMatch(int index, String expected, String actual, ParseNode errorSource) {
         // If this ever throws, consider turning input nulls into string nulls "null".
         Contract.checkNull(expected, actual);
         String message = "Failed to match expected \"" + expected + "\" with \"" + actual + "\"";
 
-        return new ParseResult(index, message, false);
+        return new ParseResult(index, message, false, errorSource.getClass());
     }
 
     public static ParseResult at(int cursor) {

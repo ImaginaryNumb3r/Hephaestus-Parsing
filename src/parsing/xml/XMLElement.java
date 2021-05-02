@@ -4,6 +4,7 @@ import essentials.contract.NoImplementationException;
 import parsing.model.AbstractParseNode;
 import parsing.model.CopyNode;
 import parsing.model.ParseResult;
+import parsing.model.WhitespaceToken;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,18 +13,18 @@ import java.util.stream.Collectors;
 
 /**
  * @author Patrick Plieschnegger
- *  - XMLElement:
- *      - XmlTag1 Nodes XmlTag2: where XmlTag1 is open and XmlTag2 is closing
- *      - XmlTag: where XmlTag is closed
+ * Grammar: XMLStartTag (InnerNodes Whitespace XMLCloseTag)
  */
 public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement> {
     private final XMLStartTag _start;
     private InnerNodes _nodes; // optional
+    private WhitespaceToken _whitespace; // optional
     private XMLCloseTag _close; // optional <- we only need this for parsing, we can get rid of it afterwards
 
     public XMLElement() {
         _start = new XMLStartTag();
         _nodes = null;
+        _whitespace = null;
         _close = null;
     }
 
@@ -61,10 +62,14 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
 
         if (_start.isOpen()) {
             _nodes = new InnerNodes();
+            _whitespace = new WhitespaceToken();
             _close = new XMLCloseTag();
 
             result = _nodes.parse(chars, nextIndex);
             if (result.isInvalid()) return result;
+            nextIndex = result.index();
+
+            result = _whitespace.parse(chars, nextIndex);
             nextIndex = result.index();
 
             result = _close.parse(chars, nextIndex);
@@ -81,7 +86,7 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
     public String toString() {
         String postfix = "";
         if (_start.isOpen()) {
-            postfix = _nodes.toString() + _close.toString();
+            postfix = _nodes.toString() + _whitespace + _close;
         }
 
         return _start + postfix;
@@ -92,7 +97,10 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
      */
     @Override
     public XMLElement deepCopy() {
-        throw new NoImplementationException();
+        XMLElement copy = new XMLElement();
+        copy.setData(this);
+
+        return copy;
     }
 
     @Override
@@ -100,9 +108,11 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
         _start.setData(other._start);
         if (other._start.isOpen()) {
             _nodes = new InnerNodes();
+            _whitespace = new WhitespaceToken();
             _close = new XMLCloseTag();
 
             _nodes.setData(other._nodes);
+            _whitespace.setData(other._whitespace);
             _close.setData(other._close);
         }
     }
@@ -114,11 +124,12 @@ public class XMLElement extends AbstractParseNode implements CopyNode<XMLElement
 
         return Objects.equals(_start, other._start)
             && Objects.equals(_nodes, other._nodes)
+            && Objects.equals(_whitespace, other._whitespace)
             && Objects.equals(_close, other._close);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_start, _nodes, _close);
+        return Objects.hash(_start, _nodes, _whitespace, _close);
     }
 }

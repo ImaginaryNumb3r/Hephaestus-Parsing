@@ -31,7 +31,7 @@ public final class SpaceToken extends OptionalConsumer implements CopyNode<Space
 
         if (_buffer.length() == 0) {
             char mandatoryChar = chars.charAt(result.index());
-            return ParseResult.notMatch(result.index(), "whitespace", Character.toString(mandatoryChar));
+            return ParseResult.notMatch(result.index(), "whitespace", Character.toString(mandatoryChar), this);
         }
 
         return result;
