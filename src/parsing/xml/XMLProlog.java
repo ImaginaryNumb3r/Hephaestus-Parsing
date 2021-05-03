@@ -15,33 +15,28 @@ import java.util.Objects;
 public final class XMLProlog extends SequenceNode implements CopyNode<XMLProlog> {
     private static final String START_TERMINAL = "<?xml";
     private static final String END_TERMINAL = "?>";
-    // private final SpaceToken _space;
     private final XMLAttributes _attributes;
     private final WhitespaceToken _trailingWhitespace;
 
-    public XMLProlog() {
-        super(new ArrayList<>());
-
-        _attributes = new XMLAttributes();
-        _trailingWhitespace = new WhitespaceToken();
-        _sequence.addAll(Arrays.asList(
-                new StringTerminal(START_TERMINAL),
-                _attributes,
-                _trailingWhitespace,
-                new StringTerminal(END_TERMINAL)
+    public XMLProlog(XMLAttributes attributes, WhitespaceToken trailingWhitespace) {
+        super(Arrays.asList(
+            new StringTerminal(START_TERMINAL),
+            attributes,
+            trailingWhitespace,
+            new StringTerminal(END_TERMINAL)
         ));
+
+        _attributes = attributes;
+        _trailingWhitespace = trailingWhitespace;
+    }
+
+    public XMLProlog() {
+        this(new XMLAttributes(), new WhitespaceToken());
     }
 
     @Override
     public XMLProlog deepCopy() {
-        XMLProlog copy = new XMLProlog();
-        XMLAttributes attributesCopy = _attributes.deepCopy();
-        WhitespaceToken whitespaceCopy = _trailingWhitespace.deepCopy();
-
-        copy._attributes.setData(attributesCopy);
-        copy._trailingWhitespace.setData(whitespaceCopy);
-
-        return copy;
+        return new XMLProlog(_attributes.deepCopy(), _trailingWhitespace.deepCopy());
     }
 
     @Override

@@ -68,7 +68,6 @@ public final class XMLStartTag extends SequenceNode implements CopyNode<XMLStart
 
     @Override
     public XMLStartTag deepCopy() {
-        // copy.setData(this);
         return new XMLStartTag(
             _prefix,
             _name,

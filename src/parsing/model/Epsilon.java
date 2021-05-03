@@ -36,7 +36,7 @@ public class Epsilon extends AbstractParseNode implements CopyNode<Epsilon> {
 
     @Override
     public boolean equals(Object obj) {
-        return false;
+        return this == obj;
     }
 
     @Override

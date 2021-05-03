@@ -1,6 +1,5 @@
 package parsing.model;
 
-import essentials.collections.IterableList;
 import essentials.util.Strings;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +12,7 @@ import java.util.stream.Stream;
  * Creator: Patrick
  * Created: 20.03.2019
  * This is a node which represents multiple subsequent nodes of the same kind.
- * This node never returns invalid.
+ * This node never returns invalid and makes no assumptions how many nodes it may parse.
  * Grammar: T*
  */
 public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implements NodeList<T> {

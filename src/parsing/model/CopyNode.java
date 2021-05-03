@@ -14,7 +14,7 @@ public interface CopyNode<T extends ParseNode> extends ParseNode {
      */
     T deepCopy();
 
-    // TODO: Determine if this method is really necessary.
+    // TODO: Determine if this method is really necessary. Right now, it makes problems with SequenceNodes.
     void setData(T other);
 
 }

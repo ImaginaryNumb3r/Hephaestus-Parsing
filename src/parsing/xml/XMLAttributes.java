@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * Creator: Patrick
  * Created: 20.03.2019
  * Grammar: Space (Attribute Whitespace)+
+ * TODO: Make a general node for "SeparatedValueNodes"
  */
 public final class XMLAttributes extends OneOrMoreNode<NodeTuple<AttributeToken, WhitespaceToken>> implements CopyNode<XMLAttributes> {
     private final SpaceToken _space;

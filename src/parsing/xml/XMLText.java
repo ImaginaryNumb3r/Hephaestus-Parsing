@@ -11,6 +11,7 @@ import java.util.Objects;
  * Creator: Patrick
  * Created: 22.03.2019
  * The text that can be between nodes.
+ * TODO: Change it so it also parses Comment Tokens natively.
  */
 public final class XMLText extends ContentNode implements CopyNode<XMLText> {
     private static final String POSTFIX = "<";
@@ -27,7 +28,6 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
         // Revert lookahead of postfix.
         result = ParseResult.at(result.index() - POSTFIX.length());
         var next = result;
-
         // HACK: Also append comments. The grammar does not support it yet.
         while (next.isValid()) {
             CommentToken comment = new CommentToken();

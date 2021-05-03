@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 /**
  * @author Patrick Plieschnegger
  */
+@Deprecated
 public class OneOrMoreNode<T extends CopyNode<T>> extends MultiNode<T> {
 
     public OneOrMoreNode(Supplier<T> tokenConstructor) {
