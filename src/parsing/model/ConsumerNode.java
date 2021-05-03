@@ -9,6 +9,7 @@ package parsing.model;
  * Characters are added to the buffer as long as the predicate is satisfied.
  * Parsing will finish as soon as a character does not satisfy the predicate.
  * The only way for invalid parsing is if the first character is not accepted by the predicate.
+ * // TODO: Can be replaced with OptionalNode and OptionalConsumer
  */
 public class ConsumerNode extends OptionalConsumer {
 

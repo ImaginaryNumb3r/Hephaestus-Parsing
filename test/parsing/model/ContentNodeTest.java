@@ -1,4 +1,4 @@
-package parsing.xml;
+package parsing.model;
 
 import org.junit.Test;
 import parsing.model.ContentNode;

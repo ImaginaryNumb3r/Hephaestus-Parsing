@@ -4,8 +4,10 @@ import java.util.Objects;
 
 /**
  * @author Patrick Plieschnegger
+ * TODO: Similarly, this should work for char sequences.
+ * -> ConsumerNode, ContentToken
  */
-public class ConditionalNode<N extends NodeList<N> & CopyNode<N>> extends AbstractParseNode {
+public class ConditionalNode<N extends NodeSequence<N> & CopyNode<N>> extends AbstractParseNode {
     private final N _node;
     private final NodeCondition<N> _condition;
 

@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 /**
  * @author Patrick Plieschnegger
  */
-public interface NodeCondition<N extends CopyNode<N>> extends Predicate<NodeList<N>> {
+public interface NodeCondition<N extends CopyNode<N>> extends Predicate<NodeSequence<N>> {
 
-    boolean test(NodeList<N> node);
+    boolean test(NodeSequence<N> node);
 
     String toString();
 
@@ -16,11 +16,11 @@ public interface NodeCondition<N extends CopyNode<N>> extends Predicate<NodeList
     }
 
     static <N extends CopyNode<N>> NodeCondition<N>
-        satisfying(Predicate<NodeList<N>> predicate, String name)
+        satisfying(Predicate<NodeSequence<N>> predicate, String name)
     {
         return new NodeCondition<>() {
             @Override
-            public boolean test(NodeList<N> node) {
+            public boolean test(NodeSequence<N> node) {
                 return predicate.test(node);
             }
 
@@ -34,7 +34,7 @@ public interface NodeCondition<N extends CopyNode<N>> extends Predicate<NodeList
     class OneOrMore<N extends CopyNode<N>> implements NodeCondition<N> {
 
         @Override
-        public boolean test(NodeList<N> node) {
+        public boolean test(NodeSequence<N> node) {
             return !node.isEmpty();
         }
 
@@ -47,7 +47,7 @@ public interface NodeCondition<N extends CopyNode<N>> extends Predicate<NodeList
     class ZeroOrOne<N extends CopyNode<N>> implements NodeCondition<N> {
 
         @Override
-        public boolean test(NodeList<N> node) {
+        public boolean test(NodeSequence<N> node) {
             return node.size() <= 1;
         }
 

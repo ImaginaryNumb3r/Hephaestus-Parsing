@@ -12,6 +12,7 @@ import java.util.Objects;
  * Created: 22.03.2019
  * The text that can be between nodes.
  * TODO: Change it so it also parses Comment Tokens natively.
+ * -> change into XMLValues which is similar to MultiNode<EitherNode<XMLText, XMLComment>>
  */
 public final class XMLText extends ContentNode implements CopyNode<XMLText> {
     private static final String POSTFIX = "<";

@@ -2,7 +2,9 @@ package parsing.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Creator: Patrick
@@ -14,7 +16,7 @@ import java.util.Objects;
  * @implNote does not extend AbstractParseNode since its built-in range check would violate the empty string policy of this Consumer.
  *           Since an empty string at the end of the document is possible and likely.
  */
-public class OptionalConsumer implements ParseNode, CharSequence {
+public class OptionalConsumer implements ParseNode, CharSequenceNode {
     protected final StringBuilder _buffer;
     protected final CharPredicate _acceptCondition;
 

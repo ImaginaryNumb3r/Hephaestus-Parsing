@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * This node never returns invalid and makes no assumptions how many nodes it may parse.
  * Grammar: T*
  */
-public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implements NodeList<T> {
+public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implements NodeSequence<T> {
     protected final List<T> _elements;
     protected final Supplier<T> _tokenConstructor;
 

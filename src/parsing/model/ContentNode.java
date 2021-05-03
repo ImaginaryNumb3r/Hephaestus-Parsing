@@ -2,7 +2,9 @@ package parsing.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Creator: Patrick
@@ -14,7 +16,7 @@ import java.util.Objects;
  * @implNote Ideally, this class would be abstract.<br>
  *           However, to create a copy we need to access the constructor of this class.
  */
-public class ContentNode extends AbstractParseNode {
+public class ContentNode extends AbstractParseNode implements CharSequenceNode {
     protected final StringBuilder _buffer;
     protected final String _prefix;
     protected final String _postfix;
@@ -99,6 +101,21 @@ public class ContentNode extends AbstractParseNode {
 
     public String getContent() {
         return _buffer.toString();
+    }
+
+    @Override
+    public int length() {
+        return _buffer.length();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return _buffer.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return _buffer.subSequence(start, end);
     }
 
     @Override
