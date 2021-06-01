@@ -50,6 +50,10 @@ public final class JObject extends SequenceNode implements CopyNode<JObject> {
         return fetchAttribute(name).map(JAttribute::getNumber);
     }
 
+    public Optional<String> fetchString(String name) {
+        return fetchAttribute(name).map(JAttribute::getString);
+    }
+
     public JObject getObject(String name) {
         return fetchObject(name).orElseThrow(() -> illegalArgumentException(name));
     }
@@ -60,6 +64,10 @@ public final class JObject extends SequenceNode implements CopyNode<JObject> {
 
     public JNumber getNumber(String name) {
         return fetchNumber(name).orElseThrow(() -> illegalArgumentException(name));
+    }
+
+    public String getString(String name) {
+        return fetchString(name).orElseThrow(() -> illegalArgumentException(name));
     }
 
     public boolean getBool(String name) {
