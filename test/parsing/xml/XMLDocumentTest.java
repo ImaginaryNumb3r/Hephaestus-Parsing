@@ -22,7 +22,7 @@ public class XMLDocumentTest extends XMLParseNodeTest {
         String file = Files.readString(testFile);
         var document = new XMLDocument();
 
-        checkParse(file, file, document, document::toString);
+        checkParse(file, document);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class XMLDocumentTest extends XMLParseNodeTest {
         String file = Files.readString(testFile);
         var document = new XMLDocument();
 
-        checkParse(file, file, document, document::toString);
+        checkParse(file, document);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class XMLDocumentTest extends XMLParseNodeTest {
         String file = Files.readString(testFile);
         var document = new XMLDocument();
 
-        checkParse(file, file, document, document::toString);
+        checkParse(file, document);
     }
 
     @Test

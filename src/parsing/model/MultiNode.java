@@ -59,11 +59,6 @@ public class MultiNode<T extends CopyNode<T>> extends AbstractParseNode implemen
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
     public int size() {
         return _elements.size();
     }

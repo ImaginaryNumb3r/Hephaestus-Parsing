@@ -33,9 +33,10 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
         map.put(new JBool(), JValueType.BOOL);
         map.put(new StringTerminal("null"), JValueType.NULL);
 
+        ParseResult result = null;
         for (var entry : map.entrySet()) {
             CopyNode<?> node = entry.getKey();
-            ParseResult result = tryParse(node, chars, index);
+            result = tryParse(node, chars, index);
 
             if (result.isValid()) {
                 _value = node;
@@ -44,7 +45,7 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
             }
         }
 
-        return ParseResult.invalid(index, "Cannot parse Json value", this);
+        return ParseResult.invalid(index, "Cannot parse Json value", this, result);
     }
 
     public JValueType getType() {

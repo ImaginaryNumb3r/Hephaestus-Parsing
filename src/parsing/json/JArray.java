@@ -1,12 +1,10 @@
 package parsing.json;
 
-import parsing.model.CharTerminal;
-import parsing.model.CopyNode;
-import parsing.model.SequenceNode;
-import parsing.model.WhitespaceToken;
+import parsing.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -17,10 +15,10 @@ import java.util.function.Function;
  *          ( '[' JValue ( ',' JValue)* ']' )
  */
 public final class JArray extends SequenceNode implements CopyNode<JArray> {
-    private final JValues _values;
+    private final OptionalNode<JValues> _values;
 
     public JArray() {
-        _values = new JValues();
+        _values = new OptionalNode<>(new JValues());
 
         _sequence.addAll(
                 Arrays.asList(
@@ -31,17 +29,19 @@ public final class JArray extends SequenceNode implements CopyNode<JArray> {
         );
     }
 
-    public JValues getValues() {
-        return _values;
+    public List<JValue> getValues() {
+        return _values.fetch()
+            .map(JValues::getValues)
+            .orElse(new ArrayList<>());
     }
 
-    public ArrayList<JValue> toArray() {
-        return _values.getValues();
+    public boolean isEmpty() {
+        return !_values.isPresent();
     }
 
     public <T> ArrayList<T> toArray(Function<JValue, T> cast) {
         ArrayList<T> array = new ArrayList<>();
-        for (JValue value : _values.getValues()) {
+        for (JValue value : getValues()) {
             array.add(cast.apply(value));
         }
 

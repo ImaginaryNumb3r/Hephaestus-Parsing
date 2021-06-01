@@ -12,7 +12,7 @@ public class ConditionalNode<N extends NodeSequence<N> & CopyNode<N>> extends Ab
     private final NodeCondition<N> _condition;
 
     public ConditionalNode(N node, NodeCondition<N> condition) {
-        this._node = node;
+        _node = node;
         _condition = condition;
     }
 

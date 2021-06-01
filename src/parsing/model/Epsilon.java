@@ -1,7 +1,5 @@
 package parsing.model;
 
-import java.util.Objects;
-
 /**
  * @author Patrick Plieschnegger
  */
@@ -41,6 +39,6 @@ public class Epsilon extends AbstractParseNode implements CopyNode<Epsilon> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this);
+        return System.identityHashCode(this);
     }
 }

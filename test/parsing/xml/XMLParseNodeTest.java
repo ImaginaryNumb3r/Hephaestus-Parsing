@@ -1,6 +1,7 @@
 package parsing.xml;
 
 import parsing.model.ParseNode;
+import parsing.model.ParseNodeTest;
 import parsing.model.ParseResult;
 
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Created: 20.03.2019
  * Purpose:
  */
-public class XMLParseNodeTest {
+public class XMLParseNodeTest extends ParseNodeTest {
     public static final Path TEST_FILE_DIR = Path.of("test", "parsing", "xml", "files");
 
     protected static List<String> readTestData(String string) {
@@ -57,35 +58,5 @@ public class XMLParseNodeTest {
         }
 
         return samples;
-    }
-
-    protected void checkParse(String expected, String data, ParseNode token, Supplier<String> dataSupplier) {
-        checkParse(expected, data, data.length(), token, dataSupplier, token::toString);
-    }
-
-    protected void checkParse(String expected, String data, int expectedParseLength, ParseNode token,
-                              Supplier<String> dataSupplier, Supplier<String> toString
-    ) {
-        var result = token.parse(data, 0);
-
-        String message = "Asserting that the token could be parsed fails for: " + data;
-        assertTrue(message, result.isValid());
-
-        message = "Asserting that the consume index is correct fails for: " + data;
-        assertEquals(message, expectedParseLength, result.index());
-
-        message = "Comparison between consume output and expected output fails";
-        assertEquals(message, expected, dataSupplier.get());
-
-        message = "Raw comparison between consume input and output fails";
-        assertEquals(message, data, toString.get());
-
-        message = "Asserting that a copy is equal failed for: " + token.getClass().getName();
-        ParseNode copy = token.deepCopy();
-        assertEquals(message, token, copy);
-
-        message = "Repeated parsing creates non-identical copies for: " + token.getClass().getName();
-        copy.parse(data, 0);
-        assertEquals(message, token, copy);
     }
 }
