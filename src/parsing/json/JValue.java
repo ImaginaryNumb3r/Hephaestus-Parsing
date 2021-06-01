@@ -102,6 +102,24 @@ public class JValue extends AbstractParseNode implements CopyNode<JValue> {
         return fetchArray().orElse(null);
     }
 
+    public String getString() {
+        if (!isString()) {
+            String type = _type != null ? _type.toString() : "none";
+            throw new IllegalStateException("Cannot return String from JValue. Current type is: \" " + type +" \"");
+        }
+
+        return ((ContentToken) _value).getContent();
+    }
+
+    public JNumber getNumber() {
+        if (!isNumber()) {
+            String type = _type != null ? _type.toString() : "none";
+            throw new IllegalStateException("Cannot return Number from JValue. Current type is: \" " + type +" \"");
+        }
+
+        return ((JNumber) _value);
+    }
+
     public ParseResult tryParse(ParseNode node, String chars, int index) {
         return node.parse(chars, index);
     }

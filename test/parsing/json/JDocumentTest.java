@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Creator: Patrick
@@ -21,5 +22,9 @@ public class JDocumentTest {
         JDocument jsonDocument = JDocument.ofFile(filePath);
 
         assertNotNull("Document could not be parsed!", jsonDocument);
+
+        JObject object = jsonDocument.getObject().getObject("web-app");
+        JArray empty = object.getArray("empty");
+        assertTrue("Empty array is not empty!", empty.isEmpty());
     }
 }

@@ -24,6 +24,10 @@ public final class JDocument extends SequenceNode implements CopyNode<JDocument>
         _sequence.addAll(asList(new WhitespaceToken(), _root));
     }
 
+    public JObject getObject() {
+        return _root;
+    }
+
     public static JDocument ofFile(Path path) throws IOException {
         String rawDocument = Files.readString(path);
 

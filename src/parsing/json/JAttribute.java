@@ -3,6 +3,7 @@ package parsing.json;
 import parsing.model.*;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Creator: Patrick
@@ -27,7 +28,7 @@ public final class JAttribute extends SequenceNode implements CopyNode<JAttribut
     }
 
     public String getKey() {
-        return _key.toString();
+        return _key.getContent();
     }
 
     public JValue getValue() {
@@ -60,6 +61,22 @@ public final class JAttribute extends SequenceNode implements CopyNode<JAttribut
 
     public boolean isNull() {
         return _value.isNull();
+    }
+
+    public Optional<Boolean> fetchBoolean() {return _value.fetchBoolean();}
+
+    public boolean getBoolean() {return _value.getBoolean();}
+
+    public JObject getObject() {return _value.getObject();}
+
+    public JArray getArray() {return _value.getArray();}
+
+    public String getString() {
+        return _value.getString();
+    }
+
+    public JNumber getNumber() {
+        return _value.getNumber();
     }
 
     @Override
