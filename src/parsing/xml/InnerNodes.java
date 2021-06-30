@@ -1,9 +1,7 @@
 package parsing.xml;
 
 import essentials.util.Nulls;
-import parsing.model.CopyNode;
-import parsing.model.MultiNode;
-import parsing.model.ParseResult;
+import parsing.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +14,12 @@ import java.util.stream.Collectors;
  * In theory, this could become an EitherNode<MultiNode<XMLNode>, XMLText> but do we want to?
  */
 public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<InnerNodes> {
-    private final XMLText _text;
+    private final EitherNode< XMLText, CommentsToken> _content;
     private Status _status;
 
     public InnerNodes() {
         super(XMLNode::new);
-        _text = new XMLText();
+        _content = new EitherNode<>(new XMLText(), new CommentsToken());
         _status = Status.NONE;
     }
 
@@ -35,7 +33,7 @@ public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<Inn
         }
         // Fallback to parsing the node value as a string.
         else {
-            ParseResult fallback = _text.parse(chars, index);
+            ParseResult fallback = _content.parse(chars, index);
             if (fallback.isInvalid()) return ParseResult.invalid(index, "TODO", this, result, fallback);
 
             result = fallback;
@@ -60,7 +58,7 @@ public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<Inn
     @Override
     public void setData(InnerNodes other) {
         reset();
-        _text.setData(other._text);
+        _content.setData(other._content);
 
         var elementsCopy = other._elements.stream()
                 .map(XMLNode::deepCopy)
@@ -79,7 +77,7 @@ public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<Inn
     }
 
     public Optional<String> getData() {
-        return Nulls.box(isText(), _text.getContent());
+        return Nulls.box(isText(), _content.toString());
     }
 
     public Optional<List<XMLNode>> innerNodes() {
@@ -88,13 +86,15 @@ public final class InnerNodes extends MultiNode<XMLNode> implements CopyNode<Inn
 
     @Override
     public void reset() {
-        _text.reset();
+        _content.first().ifPresent(XMLText::reset);
+        _content.second().ifPresent(CommentsToken::reset);
+
         _elements.clear();
     }
 
     @Override
     public String toString() {
-        return _status == Status.TEXT ? _text.toString()
+        return _status == Status.TEXT ? _content.toString()
                 : _status == Status.NODE ? super.toString()
                 : "";
     }

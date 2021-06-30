@@ -30,6 +30,8 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
         result = ParseResult.at(result.index() - POSTFIX.length());
         var next = result;
         // HACK: Also append comments. The grammar does not support it yet.
+
+        /*
         while (next.isValid()) {
             CommentToken comment = new CommentToken();
             next = comment.parse(chars, next.index());
@@ -46,7 +48,7 @@ public final class XMLText extends ContentNode implements CopyNode<XMLText> {
                     result = next;
                 }
             }
-        }
+        } */
 
         return result;
     }
