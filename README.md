@@ -1,5 +1,12 @@
 # Hephaestus-Parsing
 
+**Warning:** This project is a work in progress which started out as a proof of concept. The quality of tests and documentation is steadily increasing but the WIP nature means that the majority of the codebase of the code is subject to change.
+
+The idea behind this project was a token-based API that allows you to define a strongly typed syntax tree where every node in the tree is well-defined by a class.
+The ultimate goal is an extensible API which allows to model Context Free Grammars.
+
+This project originated in [Hephaestus-Experimental](https://github.com/ImaginaryNumb3r/Hephaestus-Experimental) but has since become its own repository due to increasing maturity and size. 
+
 ## Overview
 
 This repository contains three main packages:
