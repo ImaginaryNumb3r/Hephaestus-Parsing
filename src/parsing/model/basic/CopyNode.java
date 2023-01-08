@@ -2,7 +2,10 @@ package parsing.model.basic;
 
 import parsing.model.util.ParseNode;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @author Patrick Plieschnegger
@@ -39,4 +42,12 @@ public interface CopyNode<T extends ParseNode> extends ParseNode {
         return copy;
     }
 
+    /**
+     *
+     * @param node
+     * @return
+     */
+    static <T extends CopyNode<T>> List<T> copyList(List<T> node) {
+        return node.stream().map(CopyNode::deepCopy).collect(Collectors.toList());
+    }
 }
