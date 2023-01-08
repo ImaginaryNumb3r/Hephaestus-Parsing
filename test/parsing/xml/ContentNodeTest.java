@@ -1,8 +1,8 @@
 package parsing.xml;
 
 import org.junit.Test;
-import parsing.model.ContentNode;
-import parsing.model.ParseNode;
+import parsing.model.node.ContentNode;
+import parsing.model.util.ParseNode;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

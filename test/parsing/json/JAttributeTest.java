@@ -1,7 +1,7 @@
 package parsing.json;
 
 import org.junit.Test;
-import parsing.model.ParseResult;
+import parsing.model.util.ParseResult;
 
 import java.util.Arrays;
 

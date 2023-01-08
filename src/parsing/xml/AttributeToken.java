@@ -1,6 +1,12 @@
 package parsing.xml;
 
-import parsing.model.*;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.ContentNode;
+import parsing.model.node.SequenceNode;
+import parsing.model.terminal.CharTerminal;
+import parsing.model.token.TextToken;
+import parsing.model.token.WhitespaceToken;
+import parsing.model.util.ParseNode;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -21,7 +27,7 @@ public final class AttributeToken extends SequenceNode implements CopyNode<Attri
 
         _sequence.addAll(
             Arrays.asList(
-                _name, new WhitespaceToken(), new CharTerminal('='), new WhitespaceToken(), _value
+                    _name, new WhitespaceToken(), new CharTerminal('='), new WhitespaceToken(), _value
             )
         );
     }

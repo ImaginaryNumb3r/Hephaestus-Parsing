@@ -1,6 +1,9 @@
-package parsing.model;
+package parsing.model.node;
 
 import essentials.util.Nulls;
+import parsing.model.basic.CopyNode;
+import parsing.model.util.ParseResult;
+import parsing.model.basic.AbstractParseNode;
 
 import java.util.Objects;
 import java.util.Optional;

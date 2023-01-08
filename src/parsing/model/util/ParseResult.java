@@ -1,4 +1,4 @@
-package parsing.model;
+package parsing.model.util;
 
 import essentials.contract.Contract;
 import org.jetbrains.annotations.NotNull;

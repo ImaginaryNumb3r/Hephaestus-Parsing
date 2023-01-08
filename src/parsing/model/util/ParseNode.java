@@ -1,4 +1,4 @@
-package parsing.model;
+package parsing.model.util;
 
 /**
  * Creator: Patrick

@@ -1,6 +1,9 @@
-package parsing.model;
+package parsing.model.token;
 
 import collections.iterator.Iterables;
+import parsing.model.basic.CopyNode;
+import parsing.model.basic.OptionalConsumer;
+import parsing.model.util.ParseResult;
 
 /**
  * Creator: Patrick

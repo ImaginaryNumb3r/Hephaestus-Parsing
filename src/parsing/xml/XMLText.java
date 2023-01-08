@@ -1,9 +1,9 @@
 package parsing.xml;
 
 import essentials.annotations.Package;
-import parsing.model.ContentNode;
-import parsing.model.CopyNode;
-import parsing.model.ParseResult;
+import parsing.model.node.ContentNode;
+import parsing.model.basic.CopyNode;
+import parsing.model.util.ParseResult;
 
 import java.util.Objects;
 

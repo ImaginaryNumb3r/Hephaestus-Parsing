@@ -1,6 +1,7 @@
 package parsing.model;
 
 import org.junit.Test;
+import parsing.model.token.SpaceToken;
 import parsing.xml.XMLParseNodeTest;
 
 import static org.junit.Assert.assertEquals;

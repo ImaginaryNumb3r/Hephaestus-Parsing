@@ -1,4 +1,7 @@
-package parsing.model;
+package parsing.model.util;
+
+import parsing.model.basic.AbstractParseNode;
+import parsing.model.basic.CopyNode;
 
 /**
  * A node tuple is a sequential combination of two arbitrary nodes.

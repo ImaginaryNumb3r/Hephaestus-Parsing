@@ -1,4 +1,8 @@
-package parsing.model;
+package parsing.model.terminal;
+
+import parsing.model.basic.AbstractParseNode;
+import parsing.model.basic.CopyNode;
+import parsing.model.util.ParseResult;
 
 import java.util.Objects;
 

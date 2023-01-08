@@ -1,6 +1,12 @@
 package parsing.xml;
 
-import parsing.model.*;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.SequenceNode;
+import parsing.model.terminal.CharTerminal;
+import parsing.model.terminal.StringTerminal;
+import parsing.model.token.TextToken;
+import parsing.model.token.WhitespaceToken;
+import parsing.model.util.ParseResult;
 
 import java.util.*;
 import java.util.stream.Collectors;

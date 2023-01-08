@@ -1,9 +1,9 @@
 package parsing.json;
 
-import parsing.model.CopyNode;
-import parsing.model.ParseResult;
-import parsing.model.SequenceNode;
-import parsing.model.WhitespaceToken;
+import parsing.model.basic.CopyNode;
+import parsing.model.util.ParseResult;
+import parsing.model.node.SequenceNode;
+import parsing.model.token.WhitespaceToken;
 
 import java.io.IOException;
 import java.nio.file.Files;

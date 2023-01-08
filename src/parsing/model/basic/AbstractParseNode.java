@@ -1,4 +1,7 @@
-package parsing.model;
+package parsing.model.basic;
+
+import parsing.model.util.ParseNode;
+import parsing.model.util.ParseResult;
 
 /**
  * Creator: Patrick

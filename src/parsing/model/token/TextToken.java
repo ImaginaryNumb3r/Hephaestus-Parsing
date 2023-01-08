@@ -1,6 +1,8 @@
-package parsing.model;
+package parsing.model.token;
 
 import org.jetbrains.annotations.NotNull;
+import parsing.model.node.ConsumerNode;
+import parsing.model.basic.CopyNode;
 
 import java.util.Set;
 

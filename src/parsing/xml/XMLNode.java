@@ -1,6 +1,10 @@
 package parsing.xml;
 
-import parsing.model.*;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.ContentNode;
+import parsing.model.node.EitherNode;
+import parsing.model.token.WhitespaceToken;
+import parsing.model.util.ParseResult;
 
 import java.io.Serializable;
 import java.util.Objects;

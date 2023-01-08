@@ -1,6 +1,10 @@
 package parsing.json;
 
-import parsing.model.*;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.SequenceNode;
+import parsing.model.terminal.CharTerminal;
+import parsing.model.token.ContentToken;
+import parsing.model.token.WhitespaceToken;
 
 import java.util.Arrays;
 

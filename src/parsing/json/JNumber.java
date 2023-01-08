@@ -1,8 +1,8 @@
 package parsing.json;
 
-import parsing.model.AbstractParseNode;
-import parsing.model.CopyNode;
-import parsing.model.ParseResult;
+import parsing.model.basic.AbstractParseNode;
+import parsing.model.basic.CopyNode;
+import parsing.model.util.ParseResult;
 
 import java.util.HashSet;
 import java.util.Objects;

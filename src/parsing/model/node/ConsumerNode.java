@@ -1,4 +1,8 @@
-package parsing.model;
+package parsing.model.node;
+
+import parsing.model.util.CharPredicate;
+import parsing.model.util.ParseResult;
+import parsing.model.basic.OptionalConsumer;
 
 /**
  * Creator: Patrick

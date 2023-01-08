@@ -1,8 +1,8 @@
 package parsing.xml;
 
-import parsing.model.CopyNode;
-import parsing.model.SequenceNode;
-import parsing.model.StringTerminal;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.SequenceNode;
+import parsing.model.terminal.StringTerminal;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,11 @@
-package parsing.model;
+package parsing.model.node;
 
 import essentials.collections.IterableList;
 import essentials.util.Strings;
 import org.jetbrains.annotations.NotNull;
+import parsing.model.util.ParseNode;
+import parsing.model.util.ParseResult;
+import parsing.model.basic.AbstractParseNode;
 
 import java.util.*;
 import java.util.stream.Collectors;

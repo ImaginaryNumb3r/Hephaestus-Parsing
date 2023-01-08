@@ -1,7 +1,7 @@
 package parsing.xml;
 
-import parsing.model.ContentNode;
-import parsing.model.CopyNode;
+import parsing.model.node.ContentNode;
+import parsing.model.basic.CopyNode;
 
 import java.util.Objects;
 

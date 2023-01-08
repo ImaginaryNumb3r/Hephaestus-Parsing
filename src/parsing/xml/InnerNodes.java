@@ -1,9 +1,9 @@
 package parsing.xml;
 
 import essentials.util.Nulls;
-import parsing.model.CopyNode;
-import parsing.model.MultiNode;
-import parsing.model.ParseResult;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.MultiNode;
+import parsing.model.util.ParseResult;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package parsing.xml;
 
-import parsing.model.CopyNode;
-import parsing.model.MultiNode;
-import parsing.model.NodeTuple;
-import parsing.model.WhitespaceToken;
+import parsing.model.basic.CopyNode;
+import parsing.model.node.MultiNode;
+import parsing.model.util.NodeTuple;
+import parsing.model.token.WhitespaceToken;
 
 import java.util.stream.Collectors;
 

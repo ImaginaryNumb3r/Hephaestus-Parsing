@@ -1,7 +1,12 @@
 package parsing.json;
 
 import essentials.contract.NoImplementationException;
-import parsing.model.*;
+import parsing.model.basic.AbstractParseNode;
+import parsing.model.basic.CopyNode;
+import parsing.model.terminal.StringTerminal;
+import parsing.model.token.ContentToken;
+import parsing.model.util.ParseNode;
+import parsing.model.util.ParseResult;
 
 import java.util.HashMap;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package parsing.xml;
 
-import parsing.model.ParseNode;
+import parsing.model.util.ParseNode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

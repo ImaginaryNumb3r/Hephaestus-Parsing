@@ -1,6 +1,9 @@
-package parsing.model;
+package parsing.model.basic;
 
 import org.jetbrains.annotations.NotNull;
+import parsing.model.util.CharPredicate;
+import parsing.model.util.ParseNode;
+import parsing.model.util.ParseResult;
 
 import java.util.Objects;
 
@@ -15,10 +18,10 @@ import java.util.Objects;
  *           Since an empty string at the end of the document is possible and likely.
  */
 public class OptionalConsumer implements ParseNode, CharSequence {
-    /*package*/ final StringBuilder _buffer;
-    /*package*/ final CharPredicate _acceptCondition;
+    protected final StringBuilder _buffer;
+    protected final CharPredicate _acceptCondition;
 
-    /*package*/ OptionalConsumer(CharPredicate acceptCondition) {
+    protected OptionalConsumer(CharPredicate acceptCondition) {
         _buffer = new StringBuilder();
         _acceptCondition = acceptCondition;
     }

@@ -1,6 +1,7 @@
 package parsing.model;
 
 import org.junit.Test;
+import parsing.model.token.TextToken;
 import parsing.xml.XMLParseNodeTest;
 
 import java.util.Arrays;

@@ -1,4 +1,7 @@
-package parsing.model;
+package parsing.model.token;
+
+import parsing.model.node.ContentNode;
+import parsing.model.basic.CopyNode;
 
 /**
  * Creator: Patrick

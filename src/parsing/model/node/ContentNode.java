@@ -1,6 +1,9 @@
-package parsing.model;
+package parsing.model.node;
 
 import org.jetbrains.annotations.NotNull;
+import parsing.model.util.ParseResult;
+import parsing.model.basic.AbstractParseNode;
+import parsing.model.token.ContentToken;
 
 import java.util.Objects;
 
