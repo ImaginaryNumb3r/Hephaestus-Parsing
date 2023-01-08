@@ -6,11 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.imaginary</groupId>
-	<artifactId>hephaestus-experimental</artifactId>
-	<version>0.1</version>
+	<artifactId>hephaestus-parsing</artifactId>
+	<version>0.2</version>
 	<packaging>jar</packaging>
 
-	<name>hephaestus-experimental</name>
+	<name>hephaestus-parsing</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
